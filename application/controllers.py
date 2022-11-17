@@ -6,7 +6,7 @@ from flask import current_app as app
 from .database import db
 from sqlalchemy.exc import IntegrityError
 
-@app.route("/login",methods = ["GET","POST"])
+@app.route("/",methods = ["GET","POST"])
 def login():
-    if method == "GET":
-        return render_template("home.html")
+    
+    return render_template("home.html")
