@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SITIM</title>
-    <link rel="stylesheet" href="sitim.css">
+    <link rel="stylesheet" href="../static/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -36,16 +36,16 @@
            </div>
      
     <form id="login" class="input-group">
-        <input type="email" class="input-field" placeholder="User Id" required>
-        <input type="text" class="input-field" placeholder="Password" required>
+        <input type="email" class="input-field" name = "login_userid" placeholder="User Id" required>
+        <input type="text" class="input-field" name = "login_password" placeholder="Password" required>
         <input type="checkbox" class="check-box"><span>Remember Password</span>
         <button type="submit" class="submit-btn">Log In</button>
         
     </form>
     <form id="register" class="input-group">
-        <input type="text" class="input-field" placeholder="User Id" required>
-        <input type="email" class="input-field" placeholder="Email Id" required>
-        <input type="text" class="input-field" placeholder="Enter password" required>
+        <input type="text" class="input-field" name="signup_userid" placeholder="User Id" required>
+        <input type="email" class="input-field" name="signup_email" placeholder="Email Id" required>
+        <input type="text" class="input-field" name="signup_password" placeholder="Enter password" required>
         <input type="checkbox" class="check-box"><span>I agree to the terms and conditions</span>
         <button type="submit" class="submit-btn">Register</button>
     </form>

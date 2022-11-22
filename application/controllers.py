@@ -8,5 +8,13 @@ from sqlalchemy.exc import IntegrityError
 
 @app.route("/",methods = ["GET","POST"])
 def login():
-    
-    return render_template("home.html")
+    if request.method == "GET":
+        print("inside get method")
+        return render_template("login.html")
+
+    elif request.method == "POST":
+        
+        return render_template("sample.html")
+    else:
+        print("Not working")
+        return render_template("sample.html")
