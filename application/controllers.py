@@ -39,14 +39,15 @@ login_manager.login_view = 'login'
 
 def login():
     if request.method == "GET":
-        print("inside get method")
+        # print("inside get method")
         return render_template("login.html")
     elif request.method == "POST":
         
         
         username = request.form['username']
         password = request.form['password']
-        
+        #cname = request.form['cname']
+       
         user = Users.query.filter_by(username=username).first()
         
         if user:
@@ -73,6 +74,7 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
+        cname = request.form['cname']
         password = request.form['password']
         confirm_password = request.form['confirm-password']
 
@@ -84,6 +86,7 @@ def register():
                     new_user = Users(
                         username=username,
                         email=email,
+                        cname=cname,
                         password=hashed_password,
                     )
 

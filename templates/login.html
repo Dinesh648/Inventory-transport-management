@@ -17,13 +17,13 @@ DOCTYPE html>
     <form id="login" class="input-group">
         <div class="card">    
         
-        <input type="email" class="input-field" placeholder="User Id" required>
-        <input type="text" class="input-field" placeholder="Password" required>
-        <input type="text" class="input-field" placeholder="Company Name" required>
+        <input type="text" class="input-field" name="username" placeholder="User Id" required>
+        <input type="text" class="input-field" name="password" placeholder="Password" required>
+        <!-- <input type="text" class="input-field" name="cname" placeholder="Company Name" required> -->
         <input type="checkbox" class="check-box"><span>Remember Password</span>
         <button type="submit" class="submit-btn">Log In</button><br><br><br><br>
         <h6>Dont have an account?</h6>
-        <a href="sitimSign.html">Sign Up</a>
+        <a href="{{ url_for('register') }}">Sign-up</a>
     
     </div> 
     </form>    
