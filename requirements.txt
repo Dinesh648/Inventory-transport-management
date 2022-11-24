@@ -1,2 +1,5 @@
-Flask
-Flask-SQLAlchemy
+flask
+sqlalchemy
+flask_sqlalchemy
+flask_login
+werkzeug
