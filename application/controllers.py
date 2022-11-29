@@ -1,4 +1,4 @@
-from flask import Flask, request,Blueprint, redirect,url_for    
+from flask import Flask, request,Blueprint, redirect,url_for,flash
 from flask_login import LoginManager, login_user, login_required, logout_user
 
 from flask import render_template
@@ -14,15 +14,15 @@ from sqlalchemy.exc import IntegrityError
 #users
 
 
-home = Blueprint('home', __name__, template_folder='../templates')
-#login_manager = LoginManager(app)
-login_manager.init_app(home)
-login_manager.login_view = 'users.login'
+# home = Blueprint('home', __name__, template_folder='../templates')
+# #login_manager = LoginManager(app)
+# login_manager.init_app(home)
+# login_manager.login_view = 'users.login'
 
-@app.route('/home', methods=['GET'])
+@app.route('/<string:username>/home', methods=['GET'])
 @login_required
-def home():
-    return render_template('home.html')
+def home(username):
+    return render_template('home.html',user = username)
 
 
 #index
@@ -32,9 +32,9 @@ def index():
     return redirect('login')'''
 
 #login
-login = Blueprint('login', __name__, template_folder='../templates')
-login_manager.init_app(login)
-login_manager.login_view = 'login'
+# login = Blueprint('login', __name__, template_folder='../templates')
+# login_manager.init_app(login)
+# login_manager.login_view = 'login'
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -46,10 +46,12 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 login_user(user)
-                return redirect(url_for('home'))
+                return redirect(url_for('home',username = username, **request.args))
             else:
+                flash("Incorrect-password")
                 return redirect(url_for('login') + '?error=incorrect-password')
         else:
+            flash("User not found.Please Sign up!!")
             return redirect(url_for('login') + '?error=user-not-found')
     else:
         return render_template('login.html')
@@ -60,8 +62,8 @@ def login():
 
         
 
-register = Blueprint('register', __name__, template_folder='../templates')
-login_manager.init_app(register)
+# register = Blueprint('register', __name__, template_folder='../templates')
+# login_manager.init_app(register)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

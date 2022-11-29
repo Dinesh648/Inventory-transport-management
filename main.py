@@ -1,5 +1,7 @@
 import os
 from flask import Flask
+import time
+time.clock = time.time
 from application import config
 from application.config import LocalDevelopmentConfig
 from application.database import db

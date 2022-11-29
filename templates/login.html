@@ -22,8 +22,14 @@
             <input type="text" id="username" name="username" placeholder="User Id" required>
             <label for="pass">Password:</label>
             <input type="text" id="password" name="password" placeholder="Password" required>
+            <br>
+            
             <!-- <input type="text" class="input-field" name="cname" placeholder="Company Name" required> -->
             <!-- <input type="checkbox" class="check-box"><span>Remember Password</span> -->
+            {% for message in get_flashed_messages() %}
+                {{message}}
+            {%endfor%}
+            <br>
             <input type="submit" value="Sign-in">        <h6>Dont have an account?</h6>
             <a href="{{ url_for('register') }}">Sign-up</a>
         </header>        
