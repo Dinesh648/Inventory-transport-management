@@ -8,6 +8,7 @@ app = None
 
 def create_app():
   app = Flask(__name__, template_folder="templates")
+  app.secret_key = 'supersecretdbms'
   if os.getenv('ENV', "development") == "production":
     raise Exception("Currently no production config is setup.")
   else:

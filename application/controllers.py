@@ -36,29 +36,23 @@ login = Blueprint('login', __name__, template_folder='../templates')
 login_manager.init_app(login)
 login_manager.login_view = 'login'
 @app.route('/', methods=['GET', 'POST'])
-
 def login():
-    if request.method == "GET":
-        # print("inside get method")
-        return render_template("login.html")
-    elif request.method == "POST":
-        
-        
+    if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        #cname = request.form['cname']
-       
+
         user = Users.query.filter_by(username=username).first()
-        
+
         if user:
             if check_password_hash(user.password, password):
                 login_user(user)
-                return redirect( url_for('home') )
+                return redirect(url_for('home'))
             else:
                 return redirect(url_for('login') + '?error=incorrect-password')
         else:
-            print("user authentication failed")
             return redirect(url_for('login') + '?error=user-not-found')
+    else:
+        return render_template('login.html')
     
     
 
