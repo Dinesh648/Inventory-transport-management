@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+html, body{
+    scroll-behavior: smooth;
+}
+
 
 .name{
     color:white;
