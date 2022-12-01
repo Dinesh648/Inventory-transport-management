@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+.name{
+    color:white;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    float:left;
+    padding-top: 20px;
+    padding-left: 50px;
+    
+}
+
+nav{
+    position:absolute;
+    align-items: centre;
+    width: 100%;
+    display: inline-block;
+}
+.links{
+    flex:1;
+    text-align:right;
+}
+.links ul li{
+    list-style:none;
+    display:inline-block;
+    margin-right: 30px;
+    padding: 30px 12px;
+    font-family: 'Poppins', sans-serif;
+    position:relative;
+}
+.links ul li a{
+    color:white;
+    text-decoration: none;
+    font-size:20px;
+    
+}
+.links ul li::after{
+    content:'';
+    height: 5px;
+    width:0%;
+    background:white;
+    margin:auto;
+    display:block;
+    transition: 0.3s;
+}
+.links ul li:hover::after{
+    width:100%;
+}
+
+.text_head{
+    position: absolute;
+    color: white;
+    size: 20px;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+.segment1{
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url('Images/login_blur.jpg');
+    background-position: fixed;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 750px;
+    overflow: hidden;
+    position: relative;
+}
+
+.login_block{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /*background-color: rgb(35,15,23);*/
+    width: 20%;
+    margin: auto;
+    border-radius: 20px;
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+}
+
+.log_in_text{
+    font-size: 3em;
+    font-family: "Poppins", sans-serif;
+    color: white;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 4px;
+}
+
+input[type=text]:focus {
+    border: 3px solid wheat;
+  }
+
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 4px;
+}
+
+input[type=password]:focus {
+    border: 3px solid wheat;
+}
+
+input[type=submit]{
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: none;
+    display: block;
+    padding-bottom: 10px;
+    border-radius: 15px;
+    padding-top: 10px;
+    font-family: "Poppins", sans-serif;
+    border: white;
+    transform: skewX(0deg);
+    border-style: solid;
+    
+}
