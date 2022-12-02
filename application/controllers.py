@@ -14,6 +14,9 @@ from sqlalchemy.exc import IntegrityError
 #users
 
 
+@app.route('/', methods=['GET','POST'])
+def index():
+    return render_template('sitimHome.html')
 # home = Blueprint('home', __name__, template_folder='../templates')
 # #login_manager = LoginManager(app)
 # login_manager.init_app(home)
@@ -26,16 +29,13 @@ def home(username):
 
 
 #index
-'''index = Blueprint('index', __name__, template_folder='../templates')
-@app.route('/', methods=['GET','POST'])
-def index():
-    return redirect('login')'''
+
 
 #login
 # login = Blueprint('login', __name__, template_folder='../templates')
 # login_manager.init_app(login)
 # login_manager.login_view = 'login'
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -54,7 +54,7 @@ def login():
             flash("User not found.Please Sign up!!")
             return redirect(url_for('login') + '?error=user-not-found')
     else:
-        return render_template('login.html')
+        return render_template('sitimLogin.html')
     
     
 
@@ -91,8 +91,8 @@ def register():
                 except IntegrityError:
                     return redirect(url_for('register') + '?error=user-or-email-exists')
 
-                return redirect(url_for('login') + '?success=account-created')
+                return redirect(url_for('register') + '?success=account-created')
         else:
             return redirect(url_for('register') + '?error=missing-fields')
     else:
-        return render_template('register.html')
+        return render_template('sitimSign.html')

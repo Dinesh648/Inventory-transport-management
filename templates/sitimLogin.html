@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SITIM</title>
-    <link rel="stylesheet" href="sitimLogin.css">
+    <link rel="stylesheet" href="../static/css/sitimLogin.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@500&display=swap" rel="stylesheet">
     <link href="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
 </head>
 <body>
 
@@ -26,8 +26,8 @@
                 
                 <ul>
                     
-                    <li><a href="sitimHome.html">HOME</a></li>
-                    <li><a href="sitimSign.html">SIGN UP</a></li>
+                    <li><a href="{{url_for('index')}}">HOME</a></li>
+                    <li><a href="{{url_for('register')}}">SIGN UP</a></li>
                     <li><a href="">CONTACT US</a></li>
     
                 </ul>
@@ -43,7 +43,7 @@
             </div>
             <br><br><br>
     
-            <form action="/" method="POST" id="login-form">
+            <form action="/login" method="POST" id="login-form">
                 <header>
                     <div class="card">    
                     <label for="username" style="text-align: left; font-size: 1em; font-family: Poppins, sans-serif; color: white;">Username:</label><br>
@@ -55,10 +55,12 @@
                     <!-- <input type="text" class="input-field" name="cname" placeholder="Company Name" required> -->
                     <!-- <input type="checkbox" class="check-box"><span>Remember Password</span> -->
                     
+                    <div class="error" style="color: white;">
+                            {% for message in get_flashed_messages() %}
+                                {{message}}
+                            {%endfor%}
+                    </div>
                     
-                    <!-- {% for message in get_flashed_messages() %}
-                        {{message}}
-                    {%endfor%} -->
                     <br>
 
 

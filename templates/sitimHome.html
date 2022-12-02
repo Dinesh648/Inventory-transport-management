@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SITIM</title>
-    <link rel="stylesheet" href="sitim.css">
+    <link rel="stylesheet" href="../static/css/sitim.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -28,8 +28,8 @@
                 
                 <ul>
                     
-                    <li><a href="sitimLogin.html">LOGIN</a></li>
-                    <li><a href="sitimSign.html">SIGN UP</a></li>
+                    <li><a href="{{ url_for('login')}}">LOGIN</a></li>
+                    <li><a href="{{ url_for('register') }}">SIGN-UP</a></li>
                     <li><a href="">CONTACT US</a></li>
     
                 </ul>
@@ -55,7 +55,7 @@
         <p style="font-family: Poppins; font-size: 1.5em; margin-left: 40px; line-height: 0px;">provide industry specific solutions</p>
         <br><br>
         <div class="maintain">
-            <img style="height: 400px; width: 600px; margin-left: 50px; vertical-align: middle;" src="Images/on_season.png"/>
+            <img style="height: 400px; width: 600px; margin-left: 50px; vertical-align: middle;" src="../static/images/on_season.png"/>
             <span>
             <div class="maintain_text">
                 
@@ -80,12 +80,12 @@
             </div>
             </span>
 
-            <img style="height: 400px; width: 600px; margin-right: 100px; vertical-align: middle;" src="Images/tracking.png"/>
+            <img style="height: 400px; width: 600px; margin-right: 100px; vertical-align: middle;" src="../static/images/tracking.png"/>
         </div>
 
         <br><br><br>
         <div class="maintain">
-            <img style="height: 400px; width: 600px; margin-left: 50px; vertical-align: middle;" src="Images/cross_docking.png"/>
+            <img style="height: 400px; width: 600px; margin-left: 50px; vertical-align: middle;" src="../static/images/cross_docking.png"/>
             <span>
             <div class="maintain_text">
                 
@@ -116,7 +116,7 @@
                 </p>
             </div>
             </span>
-            <img style="height: 300px; width: 500px; margin-right: 100px; vertical-align: middle;" src="Images/cloud.png"/>
+            <img style="height: 300px; width: 500px; margin-right: 100px; vertical-align: middle;" src="../static/images/cloud.png"/>
         </div>
 
     </div>
@@ -124,9 +124,9 @@
     <br><br><br>
     <p style="font-family: Poppins; font-size: 3em; margin-left: 40px;"><b>Developed by</b></p><br>
     <div class="container">
-        <div class="left"><img src="Images/person.png" height="200px" width="200px"/><br><b>Dinesh Balivada</b><br>4NI20CS030</div></a>
-        <div class="mid"><img src="Images/person.png" height="200px" width="200px"/><br><b>Chiranth Krishna K</b><br>4NI20CS026</div></a>
-        <div class="right"><img src="Images/person.png" height="200px" width="200px"/><br><b>Manali M Bandivadekar</b><br>4NI20CS048</div></a>
+        <div class="left"><img src="../static/images/person.png" height="200px" width="200px"/><br><b>Dinesh Balivada</b><br>4NI20CS030</div></a>
+        <div class="mid"><img src="../static/images/person.png" height="200px" width="200px"/><br><b>Chiranth Krishna K</b><br>4NI20CS026</div></a>
+        <div class="right"><img src="../static/images/person.png" height="200px" width="200px"/><br><b>Manali M Bandivadekar</b><br>4NI20CS048</div></a>
     </div>
 
     <br><br><br><br>
@@ -142,3 +142,5 @@
 
 </body>
 </html>
+
+<!-- hello prands -->
