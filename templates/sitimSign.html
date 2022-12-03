@@ -1,30 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SITIM</title>
-    <link rel="stylesheet" href="../static/css/sitim.css">
+    <link rel="stylesheet" href="sitimSign.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@500&display=swap" rel="stylesheet">
-<link href="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <link href="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+
 </head>
 <body>
-    <div class="main">
-    <form id="register" class="input-group">
-        <div class="card"> 
-        <input type="email" class="input-field" placeholder="Email Id" required>
-        <input type="text" class="input-field" placeholder="Enter password" required>
-        <input type="text" class="input-field" placeholder="Confirm password" required>
-        <input type="text" class="input-field" placeholder="Company Name" required>
-        <input type="checkbox" class="check-box"><span>I agree to the terms and conditions</span>
-        <button type="submit" class="submit-btn">Sign Up</button>
-        <p>Already Registered? <a href="{{ url_for('login') }}"> Click Here</a></p>
-    </div>    
+
+    <div class="segment1">
+        <nav>
+
+            <div class="links">
+              
+                <div class="name">
+                  <h1>SITIM</h1>
+                </div>
+                
+                <ul>
+                    
+                    <li><a href="sitimHome.html">HOME</a></li>
+                    <li><a href="sitimSign.html">SIGN IN</a></li>
+        
+    
+                </ul>
+    
+            </div>
+            
+        </nav>
+
+        <div class="main">
+            <p style="font-family: Poppins, sans-serif; font-size: 3em; color: white;">Sign up</p>
+            <br><br><br>
+
+            <form id="register" class="input-group">
+                <div class="card"> 
+                    
+                    <input type="email" class="input-field" placeholder="Email Id" required>
+                    <input type="password" class="input-field" placeholder="Enter password" required>
+                    <input type="password" class="input-field" placeholder="Confirm password" required>
+                    <input type="text" class="input-field" placeholder="Company Name" required>
+                    <br><br><br>
+                    <input type="checkbox" class="check-box"><span style="font-family: Poppins, sans-serif; font-size:1em; color:white; margin-left: 10px;">I agree to the terms and conditions</span>
+                    <br><br><br>
+                    <button type="submit" class="submit-btn">Sign Up</button>
+                    <br><br>
+                    <p style="font-family: ;Poppins, sans-serif; color:white; font-size: 1em;">Already Registered?<br><br> <a href="{{ url_for('login') }}" style="font-family: Poppins, sans-serif; color:white"> Click Here</a></p>
+                </div>    
+            </form> 
+        </div>
+
     </div>
-    </form> 
+
 </body>
 </html>
