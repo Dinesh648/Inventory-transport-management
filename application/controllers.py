@@ -88,10 +88,14 @@ def register():
 
                     db.session.add(new_user)
                     db.session.commit()
+                    
                 except IntegrityError:
                     return redirect(url_for('register') + '?error=user-or-email-exists')
 
-                return redirect(url_for('register') + '?success=account-created')
+                return redirect(url_for('login') + '?success=account-created')
+            else:
+                flash("Both the passwords should match!!")
+                return redirect(url_for('register'))
         else:
             return redirect(url_for('register') + '?error=missing-fields')
     else:
