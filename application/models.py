@@ -15,33 +15,47 @@ login_manager.login_view = 'login'
 @login_manager.user_loader
 def load_user(user_id):
     try:
-        return Users.query.get(user_id)
+        if "m" in user_id:
+            return Manufacturer.query.get(user_id)
+        elif "r" in user_id:
+            return Retailer.query.get(user_id)
+        elif "w" in user_id:
+            return Wholesaler.query.get(user_id)
+        # return Users.query.get(user_id)
     except:
         return None
+
 
 class Users(db.Model, UserMixin):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True)
     email = db.Column(db.String(50), unique=True)
-    cname = db.Column(db.String)
+    cname = db.Column(db.String(40),nullable = False)
     password = db.Column(db.String)
 
 class Manufacturer(db.Model, UserMixin):
     __tablename__ = "manufacturer"
-    mid = db.Column(db.Integer,primary_key = True)
+    mid = db.Column(db.String(40),primary_key = True)
+    email = db.Column(db.String(50), unique=True)
+    cname = db.Column(db.String(40),nullable = False)
     username = db.Column(db.String(40),unique = True)
     password = db.Column(db.String)
+    def get_id(self):
+        return (self.mid)
 
-class Retialer(db.Model, UserMixin):
+class Retailer(db.Model, UserMixin):
     __tablename__ = "retailer"
     rid = db.Column(db.Integer,primary_key = True)
+    cname = db.Column(db.String(40),nullable = False)
+    email = db.Column(db.String(50), unique=True)
     username = db.Column(db.String(40),unique = True)
     password = db.Column(db.String)
 
 class Wholesaler(db.Model, UserMixin):
     __tablename__ = "wholesaler"
     wid = db.Column(db.Integer,primary_key = True)
+    
     username = db.Column(db.String(40),unique = True)
     password = db.Column(db.String)
 
