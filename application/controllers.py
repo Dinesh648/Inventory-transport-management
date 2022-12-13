@@ -1,4 +1,5 @@
-from flask import Flask, request,Blueprint, redirect,url_for,flash
+from flask import Flask, request,Blueprint, redirect,url_for,flash,json,jsonify
+
 from flask_login import LoginManager, login_user, login_required, logout_user
 
 from flask import render_template
@@ -11,10 +12,7 @@ from application.models import Users,Manufacturer,Retailer,Wholesaler
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 
-#users
-mi = 0
-wi = 0
-ri = 0
+#requierments
 
 @app.route('/', methods=['GET','POST'])
 def index():
@@ -195,3 +193,55 @@ def register():
             return redirect(url_for('register') + '?error=missing-fields')
     else:
         return render_template('sitimSign.html')
+
+#Order page
+@app.route("/<string:username>/order-bookings",methods = ['GET','POST'])
+def order(username):
+    if request.method == "GET":
+        return render_template("order.html",username = username)
+    if request.method == "POST":
+        cartstore = {}
+        products = ['Tablet','Smartphone','Earphones','Watches','Laptop','TV','Charger','Powerbank','Smartphone2','Smartphone3','Headphones','Laptop2']
+        # Tablet = request.form['Tablet']
+        # Smartphone1 = request.form['Smartphone1']
+        # Earphones = request.form['Earphones']
+        # Watches = request.form['Watches']
+        # Laptop1 = request.form['Laptop1']
+        # TV = request.form['TV']
+        # Charger = request.form['Charger']
+        # Powerbank = request.form['Powerbank']
+        # Smartphone2 = request.form['Smartphone2']
+        # Smartphone3 = request.form['Smartphone3']
+        # Headphones = request.form['Headphones']
+        # Laptop2 = request.form['Laptop2']
+
+        for product in products:
+            if product not in cartstore.keys():
+                cartstore[product] = 0
+                cartstore[product] = request.form[product]
+            else:
+                cartstore[product] = request.form[product]
+        
+        for i in cartstore.keys():
+            print(i + ":" + cartstore[i])
+        cartstorejson = (json.dumps(cartstore))
+        # l = [username,cartstorejson]
+        return redirect(url_for('cart',username = username,cartstore = cartstorejson, **request.args))
+        
+
+#Cart page
+
+@app.route("/<string:username>/cart/<string:cartstore>",methods = ['GET','POST'])
+def cart(username,cartstore):
+    if request.method == "GET":
+        # username = arguments[0]
+        
+        products_to_buy = json.loads(cartstore)
+        # typeinfo = type(products_to_buy)
+        total = 0
+        for product in products_to_buy.keys():
+            if(products_to_buy[product] != 0):
+                total += products_to_buy[product]
+        return render_template("cart.html",total = total)
+
+    
