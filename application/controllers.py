@@ -12,29 +12,19 @@ from application.models import Users,Manufacturer,Retailer,Wholesaler
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 
-#requierments
+
 
 @app.route('/', methods=['GET','POST'])
 def index():
     return render_template('sitimHome.html')
-# home = Blueprint('home', __name__, template_folder='../templates')
-# #login_manager = LoginManager(app)
-# login_manager.init_app(home)
-# login_manager.login_view = 'users.login'
 
-@app.route('/<string:username>/home', methods=['GET'])
+
+@app.route('/<string:userid>/<string:username>/home', methods=['GET'])
 @login_required
-def home(username):
-    return render_template('profile.html',username = username)
+def home(userid,username):
+    return render_template('profile.html',userid = userid,username = username)
 
 
-#index
-
-
-#login
-# login = Blueprint('login', __name__, template_folder='../templates')
-# login_manager.init_app(login)
-# login_manager.login_view = 'login'
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -47,7 +37,10 @@ def login():
             if manufacturer:
                 if check_password_hash(manufacturer.password, password):
                     login_user(manufacturer)
-                    return redirect(url_for('home',username = username, **request.args))
+                    userid = Manufacturer.query.with_entities(Manufacturer.mid).filter_by(username = username).one()[0]
+                    
+                    
+                    return redirect(url_for('home',username = username,userid = userid, **request.args))
                 else:
                     flash("Incorrect-password")
                     return redirect(url_for('login'))
@@ -60,7 +53,8 @@ def login():
             if retailer:
                 if check_password_hash(retailer.password, password):
                     login_user(retailer)
-                    return redirect(url_for('home',username = username, **request.args))
+                    userid = Retailer.query.with_entities(Retailer.rid).filter_by(username = username).one()[0]
+                    return redirect(url_for('home',username = username,userid = userid, **request.args))
                 else:
                     flash("Incorrect-password")
                     return redirect(url_for('login'))
@@ -73,7 +67,8 @@ def login():
             if Wholesaler:
                 if check_password_hash(wholesaler.password, password):
                     login_user(wholesaler)
-                    return redirect(url_for('home',username = username, **request.args))
+                    userid = Wholesaler.query.with_entities(Wholesaler.wid).filter_by(username = username).one()[0]
+                    return redirect(url_for('home',username = username,userid = userid, **request.args))
                 else:
                     flash("Incorrect-password")
                     return redirect(url_for('login'))
@@ -81,31 +76,9 @@ def login():
                 flash("Wholesaler not found.Please Sign up!!")
                 return redirect(url_for('login'))
         
-        
-        
-        # user = Users.query.filter_by(username=username).first()
-
-        # if user:
-        #     if check_password_hash(user.password, password):
-        #         login_user(user)
-        #         return redirect(url_for('home',username = username, **request.args))
-        #     else:
-        #         flash("Incorrect-password")
-        #         return redirect(url_for('login') + '?error=incorrect-password')
-        # else:
-        #     flash("User not found.Please Sign up!!")
-        #     return redirect(url_for('login') + '?error=user-not-found')
     else:
         return render_template('sitimLogin.html')
     
-    
-
-
-
-        
-
-# register = Blueprint('register', __name__, template_folder='../templates')
-# login_manager.init_app(register)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -195,53 +168,65 @@ def register():
         return render_template('sitimSign.html')
 
 #Order page
-@app.route("/<string:username>/order-bookings",methods = ['GET','POST'])
-def order(username):
+#this will display all the items that can be added into the cart.
+@app.route("/<string:userid>/<string:username>/order-bookings",methods = ['GET','POST'])
+def order(username,userid):
+    
     if request.method == "GET":
-        return render_template("order.html",username = username)
+        products = Products.query.all()
+        return render_template("order.html",username = username,userid = userid)
     if request.method == "POST":
         cartstore = {}
-        products = ['Tablet','Smartphone','Earphones','Watches','Laptop','TV','Charger','Powerbank','Smartphone2','Smartphone3','Headphones','Laptop2']
-        # Tablet = request.form['Tablet']
-        # Smartphone1 = request.form['Smartphone1']
-        # Earphones = request.form['Earphones']
-        # Watches = request.form['Watches']
-        # Laptop1 = request.form['Laptop1']
-        # TV = request.form['TV']
-        # Charger = request.form['Charger']
-        # Powerbank = request.form['Powerbank']
-        # Smartphone2 = request.form['Smartphone2']
-        # Smartphone3 = request.form['Smartphone3']
-        # Headphones = request.form['Headphones']
-        # Laptop2 = request.form['Laptop2']
-
-        for product in products:
-            if product not in cartstore.keys():
-                cartstore[product] = 0
-                cartstore[product] = request.form[product]
-            else:
-                cartstore[product] = request.form[product]
+        products = ['Tablet','SmartPhone1','Earphones','Watches','Laptop1','TV','Charger','PowerBank','SmartPhone2','SmartPhone3','Headphones','Laptop2']
         
-        for i in cartstore.keys():
-            print(i + ":" + cartstore[i])
-        cartstorejson = (json.dumps(cartstore))
-        # l = [username,cartstorejson]
-        return redirect(url_for('cart',username = username,cartstore = cartstorejson, **request.args))
+        for i in products:
+            if(i not in cartstore.keys()):
+                if(request.form[i] != 0):
+                
+                    cartstore[i] = int(request.form[i])
+            
+        
+        for product in cartstore.keys():
+        
+            if(cartstore[product] != 0):
+                pid = Products.query.with_entities(Products.pid).filter_by(pname = product).one()[0]
+            
+                price = Products.query.with_entities(Products.price).filter_by(pname = product).one()[0]
+                added_to_cart = Orders.query.with_entities(Orders.pid).filter_by(userid = userid,pid = pid).first()
+                if(added_to_cart):
+                    update_product = Orders.query.filter_by(pid = pid,userid = userid).first()
+                    update_product.quantity = cartstore[product]
+                    # return render_template("sample.html",pid = update_product)
+                else:
+                    new_order = Orders(
+                        userid = userid,
+                        pid =   pid,
+                        quantity = cartstore[product],
+                        price = price
+                    )
+                    db.session.add(new_order)
+                    db.session.commit()
+                
+        return redirect(url_for('cart',userid = userid,username = username))
         
 
 #Cart page
+#the items in the order page has to be displayed here for further process
 
-@app.route("/<string:username>/cart/<string:cartstore>",methods = ['GET','POST'])
-def cart(username,cartstore):
+@app.route("/<string:userid>/<string:username>/cart",methods = ['GET','POST'])
+def cart(username,userid):
     if request.method == "GET":
-        # username = arguments[0]
-        
-        products_to_buy = json.loads(cartstore)
-        # typeinfo = type(products_to_buy)
-        total = 0
-        for product in products_to_buy.keys():
-            if(products_to_buy[product] != 0):
-                total += products_to_buy[product]
-        return render_template("cart.html",total = total)
+        orders = db.session.query(Orders,Products).join(Products).filter(Orders.pid == Products.pid).all()
+        sum = 0
+        for i in orders:
+            sum+=(i[0].price*i[0].quantity)
+        return render_template("samplecart.html",userid = userid,username = username,orders = orders,total = sum)
 
-    
+
+@app.route('/<string:userid>/<string:username>/<int:pid>/delete',methods = ['GET','POST'])
+def delete(userid,username,pid):
+    if request.method == "GET":
+        item_to_delete = Orders.query.filter_by(userid=userid,pid = pid).first()
+        db.session.delete(item_to_delete)
+        db.session.commit()
+        return redirect(url_for('cart',username = username,userid = userid))

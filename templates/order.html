@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/sitimOrder.css">
     <title>order</title>
-    <!--<style>
+    <style>
     .table-container{
     padding:20px 20px 20px 20px;
     margin:40px auto 0;
@@ -56,11 +56,11 @@
 .table tbody tr td .btn:hover{
     background-color: rgb(255, 217, 80);
 }
-    </style>-->
+    </style>
 </head>
 <body>
     <div class="table-container"><h2>Order table</h2>
-            <form action="/{{username}}/order-bookings" method="POST">  
+            <form action="/{{ userid }}/{{ username }}/order-bookings" method="POST">  
                 <table class="table">
                     
                     <thead>
@@ -94,7 +94,7 @@
                         <td>Rishi Manufacturers</td>
                         <td>Rs.15000</td>
                         <td>10000</td>
-                        <td><input type="number" name="Smartphone" class="number" placeholder="quantity" value=0></td>
+                        <td><input type="number" name="SmartPhone1" class="number" placeholder="quantity" value=0></td>
                         <td> /-</td>
                         <td><input type="radio" name="crossdock">Yes
                             <input type="radio" name="crossdock">No</td>
@@ -128,7 +128,7 @@
                         <td>Sharma Group of manufacturers</td>
                         <td>Rs.82599/-</td>
                         <td>10000</td>
-                        <td><input type="number" name="Laptop" class="number" placeholder="quantity" value=0></td>
+                        <td><input type="number" name="Laptop1" class="number" placeholder="quantity" value=0></td>
                         <td> /-</td>
                         <td><input type="radio" name="crossdock">Yes
                             <input type="radio" name="crossdock">No</td>
@@ -161,7 +161,7 @@
                         <td>Dhiraj electronic Store</td>
                         <td>Rs.3000/-</td>
                         <td>10000</td>
-                        <td><input type="number" name="Powerbank" class="number" placeholder="quantity" value=0></td>
+                        <td><input type="number" name="PowerBank" class="number" placeholder="quantity" value=0></td>
                         <td> /-</td>
                         <td><input type="radio" name="crossdock">Yes
                             <input type="radio" name="crossdock">No</td>
@@ -172,7 +172,7 @@
                         <td>Ram enterprise</td>
                         <td>Rs.16000/-</td>
                         <td>10000</td>
-                        <td><input type="number" name="Smartphone2" class="number" placeholder="quantity" value=0></td>
+                        <td><input type="number" name="SmartPhone2" class="number" placeholder="quantity" value=0></td>
                         <td> /-</td>
                         <td><input type="radio" name="crossdock">Yes
                             <input type="radio" name="crossdock">No</td>
@@ -183,7 +183,7 @@
                         <td>Rishi Manufacturers</td>
                         <td>Rs.18000/-</td>
                         <td>1000</td>
-                        <td><input type="number" name="Smartphone3" class="number" placeholder="quantity" value=0></td>
+                        <td><input type="number" name="SmartPhone3" class="number" placeholder="quantity" value=0></td>
                         <td> /-</td>
                         <td><input type="radio" name="crossdock">Yes
                             <input type="radio" name="crossdock">No</td>

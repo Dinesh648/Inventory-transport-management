@@ -46,7 +46,7 @@ class Manufacturer(db.Model, UserMixin):
 
 class Retailer(db.Model, UserMixin):
     __tablename__ = "retailer"
-    rid = db.Column(db.Integer,primary_key = True)
+    rid = db.Column(db.String(40),primary_key = True)
     cname = db.Column(db.String(40),nullable = False)
     email = db.Column(db.String(50), unique=True)
     username = db.Column(db.String(40),unique = True)
@@ -54,21 +54,22 @@ class Retailer(db.Model, UserMixin):
 
 class Wholesaler(db.Model, UserMixin):
     __tablename__ = "wholesaler"
-    wid = db.Column(db.Integer,primary_key = True)
+    wid = db.Column(db.String(40),primary_key = True)
     
-    username = db.Column(db.String(40),unique = True)
+    username = db.Column(db.String(40))
     password = db.Column(db.String)
 
 class Products(db.Model, UserMixin):
     __tablename__ = "products"
     pid = db.Column(db.Integer,primary_key = True)
     pname = db.Column(db.String(40),nullable = False,unique = True)
-    mdate = db.Column(db.String(40))
-    price = db.Column(db.Numeric,nullable = False)
+    price = db.Column(db.Integer,nullable = False)
+    manufacturer = db.Column(db.String(100),nullable = False)
+    available = db.Column(db.Integer)
 
 class Orders(db.Model, UserMixin):
     __tablename__ = "orders"
-    userid = db.Column(db.Integer,nullable = False,primary_key = True)
-    type = db.Column(db.String(40),primary_key = True)
-    pid = db.Column(db.Integer,unique = True)
+    userid = db.Column(db.String(40))
+    pid = db.Column(db.Integer, db.ForeignKey('products.pid'),primary_key = True)
     quantity = db.Column(db.Integer)
+    price = db.Column(db.Integer,nullable = False)

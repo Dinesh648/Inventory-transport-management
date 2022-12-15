@@ -8,5 +8,8 @@
 </head>
 <body>
     <p>Getting data....</p>
-    {{ total }}
+    {%for order in orders%}
+        {{order[1]['pname'],order[0]['price']}}
+    {%endfor%}
+    
 </html>
