@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/sitimOrder.css">
+    <link rel="stylesheet" href="sitimOrder.css">
+    <!--css file is sitimOrder.css-->
     <title>order</title>
-    <style>
+    <!--<style>
     .table-container{
     padding:20px 20px 20px 20px;
     margin:40px auto 0;
@@ -21,7 +22,6 @@
 .table{
     width:100%;
     border-collapse:collapse;
-    
 }
 .table thead{
     background-color:orange;
@@ -57,179 +57,205 @@
 .table tbody tr td .btn:hover{
     background-color: rgb(255, 217, 80);
 }
-.btn:hover{
-    background-color: rgb(255, 217, 80); 
-}
-.btn{
-    
-    width: 130px;
-    padding:7px 7px 7px 7px;
-    color: white;
-    display: inline-block;
-    background-color: rgb(9, 152, 9);
-    font-weight: medium;
-    border-radius:5px;
-    user-select: none;
-    border:none;
-}
-    </style>
+    </style>-->
 </head>
 <body>
     <div class="table-container"><h2>Order table</h2>
-            <form action="/{{ userid }}/{{ username }}/order-bookings" method="POST">  
-                <table class="table">
-                    
-                    <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>manufacturer</th>
-                        <th>Price</th>
-                        <th>Available quantity</th>
-                        <th>Quantity</th>
-                        <th>cross docking</th>
-                    </tr>
-                    
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Tablet</td>
-                        <td>Ram enterprise</td>
-                        <td>Rs.40000/-</td>
-                        <td>10000</td>
-                        <td><input class="w-25 pl-1" name="Tablet" value="0" type="number"></td>
-                        
-                        <td><input type="radio"  name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        
-                        <!-- <td><a href="#"><button type="submit" class="btn">Add to cart</button></a></td> -->
-                    </tr>
-                    <tr>
-                        <td>Smart Phone 1</td>
-                        <td>Rishi Manufacturers</td>
-                        <td>Rs.15000</td>
-                        <td>10000</td>
-                        <td><input type="number" name="SmartPhone1" class="number" placeholder="quantity" value=0></td>
-                        
-                        <td><input type="radio" name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        <!-- <td><a href="#"><button type="submit" class="btn">Add to cart</button></a></td> -->
-                    </tr>
-                    <tr>
-                        <td>Earphones</td>
-                        <td>Ram enterprise</td>
-                        <td>Rs.1000/-</td>
-                        <td>10000</td>
-                        <td><input type="number" name="Earphones" class="number" placeholder="quantity" value=0></td>
-                        
-                        <td><input type="radio" name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        <!-- <td><a href="#" ><button type="submit" class="btn">Add to cart</button></a></td> -->
-            </button>     </tr>
-                    
-                    <tr>
-                        <td>Watches</td>
-                        <td>Ram enterprise</td>
-                        <td>Rs.1599/-</td>
-                        <td>10000</td>
-                        <td><input type="number" name="Watches" class="number" placeholder="quantity" value=0></td>
-                        
-                        <td><input type="radio" name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        <!-- <td><a href="#"><button type="submit" class="btn">Add to cart</button></a></td> -->
-                    </tr>
-                    <tr>
-                        <td>Laptop 1</td>
-                        <td>Sharma Group of manufacturers</td>
-                        <td>Rs.82599/-</td>
-                        <td>10000</td>
-                        <td><input type="number" name="Laptop1" class="number" placeholder="quantity" value=0></td>
-                        
-                        <td><input type="radio" name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        <!-- <td><a href="#"><button type="submit" class="btn">Add to cart</button></a></td> -->
-                    </tr>
-                    <tr>
-                        <td>TV</td>
-                        <td>Ram enterprise</td>
-                        <td>Rs.38000/-</td>
-                        <td>10000</td>
-                        <td><input type="number" name="TV" class="number" placeholder="quantity" value=0></td>
-                        
-                        <td><input type="radio" name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        <!-- <td><a href=""><button type="submit" class="btn">Add to cart</button></a></td> -->
-                    </tr>
-                    <tr>
-                        <td>Charger</td>
-                        <td>Dhiraj electronic Store</td>
-                        <td>Rs.1300/-</td>
-                        <td>10000</td>
-                        <td><input type="number" name="Charger" class="number" placeholder="quantity" value=0></td>
-                        
-                        <td><input type="radio" name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        <!-- <td><a href="#"><button type="submit" class="btn">Add to cart</button></a></td> -->
-                    </tr>
-                    <tr>
-                        <td>Power Bank</td>
-                        <td>Dhiraj electronic Store</td>
-                        <td>Rs.3000/-</td>
-                        <td>10000</td>
-                        <td><input type="number" name="PowerBank" class="number" placeholder="quantity" value=0></td>
-                        
-                        <td><input type="radio" name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        <!-- <td><a href="#"><button type="submit" class="btn">Add to cart</button></a></td> -->
-                    </tr>
-                    <tr>
-                        <td>Smart Phone 2</td>
-                        <td>Ram enterprise</td>
-                        <td>Rs.16000/-</td>
-                        <td>10000</td>
-                        <td><input type="number" name="SmartPhone2" class="number" placeholder="quantity" value=0></td>
-                        
-                        <td><input type="radio" name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        <!-- <td><a href="#"><button type="submit" class="btn">Add to cart</button></a></td> -->
-                    </tr>
-                    <tr>
-                        <td>Smart Phone 3</td>
-                        <td>Rishi Manufacturers</td>
-                        <td>Rs.18000/-</td>
-                        <td>1000</td>
-                        <td><input type="number" name="SmartPhone3" class="number" placeholder="quantity" value=0></td>
-                        
-                        <td><input type="radio" name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        <!-- <td><a href="#"><button type="submit" class="btn">Add to cart</button></a></td> -->
-                    </tr>
-                    <tr>
-                        <td>Headphones</td>
-                        <td>Dhiraj electronic Store</td>
-                        <td>Rs.2999/-</td>
-                        <td>10000</td>
-                        <td><input type="number" name="Headphones"  class="number" placeholder="quantity" value=0></td>
-                        
-                        <td><input type="radio" name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        <!-- <td><a href="#"><button type="submit" class="btn">Add to cart</button></a></td> -->
-                    </tr>
-                    <tr>
-                        <td>Laptop 2</td>
-                        <td>Ram enterprise</td>
-                        <td>Rs.79999/-</td>
-                        <td>10000</td>
-                        <td><input type="number" name="Laptop2" class="number" placeholder="quantity" value=0></td>
-                        
-                        <td><input type="radio" name="crossdock">Yes
-                            <input type="radio" name="crossdock">No</td>
-                        <!-- <td><a href="#"><button type="submit" class="btn">Add to cart</button></a></td> -->
-                    </tr>
-                </tbody>
-                </table>
-                <br>
-                <a href="#"><button type="submit" class="btn" value="Add to cart">Add to cart</button></a>
-            </form>
+     
+            <table class="table">
+                
+                <thead>
+                   <tr>
+
+                   <th>Product Id</th>
+                    <th>Product</th>
+                    <th>manufacturer</th>
+                    <th>Price</th>
+                    <th>Available quantity</th>
+                    <th>Quantity</th>
+                    <th>total</th>
+                    <th>cross docking</th>
+                    <th>order</th>
+                   </tr>
+                
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Tablet</td>
+                    <td>Ram enterprise</td>
+                    <td>Rs.40000/-</td>
+                    <td>10000</td>
+                    <td><input class="w-25 pl-1" value="100" type="number" min="100" required></td>
+
+                    <button onselect="myfunc()"></button>
+                    <td> /-</td>
+                    <td><input type="radio"  name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#"><button class="btn">Add to cart</button></a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Smart Phone 1</td>
+                    <td>Rishi Manufacturers</td>
+                    <td>Rs.15000</td>
+                    <td>10000</td>
+                    <td><input type="number" class="number" placeholder="quantity" value=100 min="100" required></td>
+                    <button onselect="myfunc()"></button>
+                    <td> /-</td>
+                    <td><input type="radio" name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#"><button class="btn">Add to cart</button></a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Earphones</td>
+                    <td>Ram enterprise</td>
+                    <td>Rs.1000/-</td>
+                    <td>10000</td>
+                    <td><input type="number" class="number" placeholder="quantity" value=100 min="100" required></td>
+                    <button onselect="myfunc()"></button>
+                    <td> /-</td>
+                    <td><input type="radio" name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#" ><button class="btn">Add to cart</button></a></td>
+           </button>     </tr>
+                
+                <tr>
+                    <td>4</td>
+                    <td>Watches</td>
+                    <td>Ram enterprise</td>
+                    <td>Rs.1599/-</td>
+                    <td>10000</td>
+                    <td><input type="number" class="number" placeholder="quantity"  value=100 min="100" required></td>
+                    <button onselect="myfunc()"></button>
+
+                    <td> /-</td>
+                    <td><input type="radio" name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#"><button class="btn">Add to cart</button></a></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Laptop 1</td>
+                    <td>Sharma Group of manufacturers</td>
+                    <td>Rs.82599/-</td>
+                    <td>10000</td>
+                    <td><input type="number" class="number" placeholder="quantity" value=100 min="100" required></td>
+                    <button onselect="myfunc()"></button>
+                    <td> /-</td>
+                    <td><input type="radio" name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#"><button class="btn">Add to cart</button></a></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>TV</td>
+                    <td>Ram enterprise</td>
+                    <td>Rs.38000/-</td>
+                    <td>10000</td>
+                    <td><input type="number" class="number" placeholder="quantity" value=100 min="100" required></td>
+                    <button onselect="myfunc()"></button>
+                    <td> /-</td>
+                    <td><input type="radio" name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#"><button class="btn">Add to cart</button></a></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Charger</td>
+                    <td>Dhiraj electronic Store</td>
+                    <td>Rs.1300/-</td>
+                    <td>10000</td>
+                    <td><input type="number" class="number" placeholder="quantity" value=100 min="100" required></td>
+                    <button onselect="myfunc()"></button>
+                    <td> /-</td>
+                    <td><input type="radio" name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#"><button class="btn">Add to cart</button></a></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Power Bank</td>
+                    <td>Dhiraj electronic Store</td>
+                    <td>Rs.3000/-</td>
+                    <td>10000</td>
+                    <td><input type="number" class="number" placeholder="quantity" value=100 min="100" required></td>
+                    <button onselect="myfunc()"></button>
+                    <td> /-</td>
+                    <td><input type="radio" name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#"><button class="btn">Add to cart</button></a></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Smart Phone 2</td>
+                    <td>Ram enterprise</td>
+                    <td>Rs.16000/-</td>
+                    <td>10000</td>
+                    <td><input type="number" class="number" placeholder="quantity" value=100 min="100" required></td>
+                    <button onselect="myfunc()"></button>
+                    <td> /-</td>
+                    <td><input type="radio" name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#"><button class="btn">Add to cart</button></a></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Smart Phone 3</td>
+                    <td>Rishi Manufacturers</td>
+                    <td>Rs.18000/-</td>
+                    <td>1000</td>
+                    <td><input type="number" class="number" placeholder="quantity" value=100 min="100" required></td>
+                    <button onselect="myfunc()"></button>
+                    <td> /-</td>
+                    <td><input type="radio" name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#"><button class="btn">Add to cart</button></a></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Headphones</td>
+                    <td>Dhiraj electronic Store</td>
+                    <td>Rs.2999/-</td>
+                    <td>10000</td>
+                    <td><input type="number" class="number" placeholder="quantity" value=100 min="100" required></td>
+                    <button onselect="myfunc()"></button>
+                    <td> /-</td>
+                    <td><input type="radio" name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#"><button class="btn">Add to cart</button></a></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Laptop 2</td>
+                    <td>Ram enterprise</td>
+                    <td>Rs.79999/-</td>
+                    <td>10000</td>
+                    <td><input type="number" class="number" placeholder="quantity" value=100 min="100" required></td>
+                    <button onselect="myfunc()"></button>
+                    <td> /-</td>
+                    <td><input type="radio" name="crossdock">Yes
+                        <input type="radio" name="crossdock">No</td>
+                    <td><a href="#"><button class="btn">Add to cart</button></a></td>
+                </tr>
+            </tbody>
+            </table>
+            
+
+
+
+<script>
+function myFunction() {
+  const inpObj = document.getElementById("id1");
+  if (!inpObj.checkValidity()) {
+    document.getElementById("demo").innerHTML = inpObj.validationMessage;
+  } else {
+    document.getElementById("demo").innerHTML = "Input OK";
+  } 
+} 
+</script>
+
         </div>
         </body>
 </html>
