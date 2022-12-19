@@ -8,8 +8,8 @@
 </head>
 <body>
     <p>Getting data....</p>
-    {%for order in orders%}
-        {{order[1]['pname'],order[0]['price']}}
-    {%endfor%}
-    
+        <!-- {%for owned in owned_products%}
+            {{owned['pname']}}
+        {%endfor%}   -->
+    {{orders}}
 </html>

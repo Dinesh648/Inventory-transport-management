@@ -22,7 +22,12 @@ def index():
 @app.route('/<string:userid>/<string:username>/home', methods=['GET'])
 @login_required
 def home(userid,username):
-    return render_template('profile.html',userid = userid,username = username)
+    if('m' in userid):
+        return render_template('profile.html',userid = userid,username = username)
+    elif('r' in userid):
+        return render_template('retailerprofile.html',userid = userid,username = username)
+    elif('w' in userid):
+        return render_template('wholesalerprofile.html',userid = userid,username  = username)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -125,7 +130,7 @@ def register():
                         db.session.add(new_wholesaler)
                         db.session.commit()
                     except IntegrityError:
-                        flash("Wholesaler already exits!")
+                        flash("Wholesaler already exists!")
                         return redirect(url_for('register'))
                 elif organization == "Retailer":
                     number_of_users = Retailer.query.count()
@@ -180,7 +185,7 @@ def order(username,userid):
         products = ['Tablet','SmartPhone1','Earphones','Watches','Laptop1','TV','Charger','PowerBank','SmartPhone2','SmartPhone3','Headphones','Laptop2']
         
         for i in products:
-            if(i not in cartstore.keys()):
+            if(i not in (cartstore.keys())):
                 if(request.form[i] != 0):
                 
                     cartstore[i] = int(request.form[i])
@@ -195,7 +200,7 @@ def order(username,userid):
                 added_to_cart = Orders.query.with_entities(Orders.pid).filter_by(userid = userid,pid = pid).first()
                 if(added_to_cart):
                     update_product = Orders.query.filter_by(pid = pid,userid = userid).first()
-                    update_product.quantity = cartstore[product]
+                    update_product.quantity = cartstore[product]#updating the value in the database
                     # return render_template("sample.html",pid = update_product)
                 else:
                     new_order = Orders(
@@ -216,7 +221,7 @@ def order(username,userid):
 @app.route("/<string:userid>/<string:username>/cart",methods = ['GET','POST'])
 def cart(username,userid):
     if request.method == "GET":
-        orders = db.session.query(Orders,Products).join(Products).filter(Orders.pid == Products.pid).all()
+        orders = db.session.query(Orders,Products).join(Products).filter(Orders.pid == Products.pid,Orders.userid == userid).all()
         sum = 0
         for i in orders:
             sum+=(i[0].price*i[0].quantity)
@@ -227,6 +232,73 @@ def cart(username,userid):
 def delete(userid,username,pid):
     if request.method == "GET":
         item_to_delete = Orders.query.filter_by(userid=userid,pid = pid).first()
+        # return render_template("sample.html",orders = item_to_delete)
         db.session.delete(item_to_delete)
         db.session.commit()
         return redirect(url_for('cart',username = username,userid = userid))
+
+@app.route('/<string:userid>/<string:username>/owned_products',methods = ["GET","POST"])
+def owned(username,userid):
+    #common for both retialer and the wholesaler
+    products = Owned.query.filter_by(userid = userid).all()
+    return render_template("myproducts.html",username = username,userid = userid,products = products)
+
+@app.route('/<string:userid>/<string:username>/request-product',methods = ['GET','POST'])
+def make_request(username,userid):
+    if "r" in userid:
+        likeString = "'%" + "w" + "%'"
+        owned_products = db.session.query(Owned).filter(Owned.userid.ilike("%"+ "w" +"%")).all()
+    # print(owned_products[0])
+    elif "w" in userid:
+        likeString = "'%" + "m" + "%'"
+        owned_products = db.session.query(Owned).filter(Owned.userid.ilike("%"+ "m" +"%")).all()
+        
+        
+    if request.method == "GET":
+        for i in owned_products:
+        
+            requested_products = db.session.query(Request).filter(Request.pid == i.pid).first()
+            if(i.pid == requested_products.pid):
+                owned_products.remove(i)
+        return render_template("placerequest.html",userid = userid, username =username,owned_products = owned_products)
+    elif request.method == "POST":
+        # product = owned_products[1].pname
+        # got = request.form[product]
+        # return render_template("sample.html",got=got)
+        for owned in owned_products:
+            try:
+                if int(request.form[owned.pname]) != 0:
+                    new_request = Request(
+                        senduserid = userid,
+                        recuserid = owned.userid,
+                        pid = owned.pid,
+                        pname = owned.pname,
+                        quantity = request.form[owned.pname],
+                        price = owned.price,
+                    )
+                    db.session.add(new_request)
+                    db.session.commit()
+            except:
+                continue
+        return redirect(url_for('home',userid = userid,username = username,**request.args))
+#to check what products need to be accepted in pending
+
+@app.route('/<string:userid>/<string:username>/checking-request',methods = ['GET','POST'])
+def pending(userid,username):
+    pending = Request.query.filter_by(recuserid = userid,status = "Pending").all()
+    if request.method == "GET":
+        #on the receiver end the pending requests will be posted here
+        return render_template("status.html",username = username,userid = userid,pendings = pending)
+    if request.method == "POST":
+        accepted = request.form['product']
+        update_request = Request.query.filter_by(pid = accepted,recuserid = userid).first()
+        update_request.status = "Accepted"
+        new_order = Orders(
+            userid = update_request.senduserid,
+            pid = accepted,
+            quantity = update_request.quantity,
+            price = update_request.price
+        )
+        db.session.add(new_order)
+        db.session.commit()
+        return redirect(url_for('pending',username = username,userid = userid,**request.args))

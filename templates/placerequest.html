@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/sitimOrder.css">
+    <title>order</title>
+    <style>
+    .table-container{
+    padding:20px 20px 20px 20px;
+    margin:40px auto 0;
+    width:100%;
+}
+.table-container h2{
+    font-size: 30px;
+    text-align: center;
+    padding: 0px 0px 0px 0px;
+    color: rgb(0, 183, 255);
+}
+.table{
+    width:100%;
+    border-collapse:collapse;
+    
+}
+.table thead{
+    background-color:orange;
+}
+.table thead tr th{
+    font-size: 17px;
+    font-weight: medium;
+    letter-spacing:0.35px;
+    padding:14px;
+    vertical-align:top;
+    border:1px solid rgb(200, 188, 188);
+}
+.table tbody tr td{
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing:0.35px;
+    padding:8px;
+    text-align: center;
+    border:1px solid rgb(196, 188, 188);
+    
+}
+.table tbody tr td .btn{
+    width: 130px;
+    padding:7px 7px 7px 7px;
+    color: white;
+    display: inline-block;
+    background-color: rgb(9, 152, 9);
+    font-weight: medium;
+    border-radius:5px;
+    user-select: none;
+    border:none;
+}
+.table tbody tr td .btn:hover{
+    background-color: rgb(255, 217, 80);
+}
+.btn:hover{
+    background-color: rgb(255, 217, 80); 
+}
+.btn{
+    
+    width: 130px;
+    padding:7px 7px 7px 7px;
+    color: white;
+    display: inline-block;
+    background-color: rgb(9, 152, 9);
+    font-weight: medium;
+    border-radius:5px;
+    user-select: none;
+    border:none;
+}
+    </style>
+</head>
+<body>
+    <div class="table-container"><h2>Order table</h2>
+            
+                <table class="table">
+                    
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>manufacturer</th>
+                        <th>Price</th>
+                        <th>Available quantity</th>
+                        <th>Quantity</th>
+                        <th>cross docking</th>
+                        <th>Action</th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    {% for owned_product in owned_products %}
+                        
+                        <form action="/{{ userid }}/{{ username }}/request-product" method="POST">          
+                            <tr>
+                                <td>{{owned_product['pname']}}</td>
+                                <td>{{owned_product['userid']}}</td>
+                                <td>{{owned_product['price']}}</td>
+                                <td>{{owned_product['quantity']}}</td>
+                                <td><input class="w-25 pl-1" name={{owned_product['pname']}} value=100 min = "100" type="number"></td>
+                                <td><input type="radio"  name="crossdock">Yes
+                                    <input type="radio" name="crossdock">No</td>
+                                    <td><button type="submit" class="btn" value="Place-request">Place-request</button></td>
+                            </tr>
+                        </form>
+                    {%endfor%}
+
+                </tbody>
+                </table>
+                <br>
+                
+            <a href="{{url_for('cart',username = username,userid = userid,**request.args)}}" class="btn"> Cart</a>
+            <br><br>
+            <a href="{{url_for('home',username = username,userid = userid,**request.args)}}" class="btn">Go back</a>
+            <script>
+                function myFunction() {
+                  const inpObj = document.getElementById("id1");
+                  if (!inpObj.checkValidity()) {
+                    document.getElementById("demo").innerHTML = inpObj.validationMessage;
+                  } else {
+                    document.getElementById("demo").innerHTML = "Input OK";
+                  } 
+                } 
+                </script>
+        </div>
+        </body>
+</html>

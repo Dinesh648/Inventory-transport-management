@@ -51,13 +51,18 @@ class Retailer(db.Model, UserMixin):
     email = db.Column(db.String(50), unique=True)
     username = db.Column(db.String(40),unique = True)
     password = db.Column(db.String)
+    def get_id(self):
+        return (self.rid)
 
 class Wholesaler(db.Model, UserMixin):
     __tablename__ = "wholesaler"
-    wid = db.Column(db.String(40),primary_key = True)
-    
-    username = db.Column(db.String(40))
-    password = db.Column(db.String)
+    wid = db.Column(db.String(40),primary_key = True,nullable = False)
+    email = db.Column(db.String(50), unique=True)
+    cname = db.Column(db.String(40),nullable = False)
+    username =db.Column(db.String(40),unique = True)
+    password = db.Column(db.String,nullable = False)
+    def get_id(self):
+        return (self.wid)
 
 class Products(db.Model, UserMixin):
     __tablename__ = "products"
@@ -73,3 +78,21 @@ class Orders(db.Model, UserMixin):
     pid = db.Column(db.Integer, db.ForeignKey('products.pid'),primary_key = True)
     quantity = db.Column(db.Integer)
     price = db.Column(db.Integer,nullable = False)
+
+class Owned(db.Model,UserMixin):
+    __tablename__ = "owned"
+    pname = db.Column(db.String(40),nullable = False)
+    userid = db.Column(db.String(40))
+    pid = db.Column(db.Integer,primary_key = True)
+    quantity = db.Column(db.Integer)
+    price = db.Column(db.Integer)
+
+class Request(db.Model,UserMixin):
+    __tablename__ = "requests"
+    senduserid = db.Column(db.String(40))
+    recuserid = db.Column(db.String(40))
+    pid = db.Column(db.Integer,primary_key = True)
+    pname = db.Column(db.String(40),nullable = False)
+    quantity = db.Column(db.Integer,nullable = False)
+    price= db.Column(db.Integer,nullable = False)
+    status = db.Column(db.String(40),default = 'Pending')
