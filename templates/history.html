@@ -86,19 +86,21 @@
                     <thead>
                     <tr>
                         <td>Product Name</td>
-                <td>Available</td>
-                <td>Price</td>
+                        <td>Available</td>
+                        <td>Price</td>
+                        <td>Seller ID</td>
                     </tr>
                     
                 </thead>
                 <tbody>
                     
                         
-                    {%for product in products %}
+                    {%for product in previous %}
                     <tr>
                         <td>{{ product['pname'] }}</td>
                         <td>{{ product['quantity'] }}</td>
                         <td>{{ product['price'] }}</td>
+                        <td>{{ product['recuserid'] }}</td>
                     </tr>
                 
                     {%endfor%}

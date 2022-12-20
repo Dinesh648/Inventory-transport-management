@@ -157,11 +157,12 @@ ul.nav-news-feed i.icon6{color: #9e1f63;}
               <li><i class="fa fa-book"></i><div><a href="">Order History</a></div></li>
               <li><i class="fa fa-credit-card"></i><div><a href="#">Payments</a></div></li>
               <li><i class="fa fa-map-marker"></i><div><a href="#">Address</a></div></li>
+              <li><i class="fa fa-pending-requests"><div><a href="{{url_for('pending',username = username,userid = userid,**request.args)}}">Pending Requests</a></div></i></li><br>
               <li><i class="fa fa-ownedproducts"></i><div><a href="{{url_for('owned',username = username,userid = userid)}}">Products</a></div></li>
-              <li><i class="fa fa-shopping-cart"></i><div><a href="{{ url_for('order',username = username, userid = userid,**request.args) }}">Order bookings</a></div></li>
+              <!-- <li><i class="fa fa-shopping-cart"></i><div><a href="{{ url_for('order',username = username, userid = userid,**request.args) }}">Order bookings</a></div></li> -->
               <li><i class="fa fa-question-circle"></i><div><a href="#">Help</a></div></li>
               <li><i class="fa fa-cog"></i><div><a href="#">Settings</a></div></li>
-              <li><i class="fa fa-power-off"></i><div><a href="#">Log out</a></div></li>
+              
             </ul><!--news-feed links ends-->
            
         </div>

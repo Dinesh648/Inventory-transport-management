@@ -96,3 +96,12 @@ class Request(db.Model,UserMixin):
     quantity = db.Column(db.Integer,nullable = False)
     price= db.Column(db.Integer,nullable = False)
     status = db.Column(db.String(40),default = 'Pending')
+
+class Transport(db.Model,UserMixin):
+    __tablename__ = "transport"
+    truckid = db.Column(db.Integer,primary_key = True)
+    drivername = db.Column(db.String(40))
+    destination = db.Column(db.String(100))
+    recuserid = db.Column(db.String(50))
+    def get_id(self):
+        return self.recuserid

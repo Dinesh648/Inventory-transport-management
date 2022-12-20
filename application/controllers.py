@@ -1,4 +1,4 @@
-from flask import Flask, request,Blueprint, redirect,url_for,flash,json,jsonify
+from flask import Flask, request,Blueprint, redirect,url_for,flash,json,jsonify,session
 
 from flask_login import LoginManager, login_user, login_required, logout_user
 
@@ -224,7 +224,7 @@ def cart(username,userid):
         orders = Request.query.filter_by(senduserid = userid,status = "Accepted").all()
         sum = 0
         for i in orders:
-            sum+=(i.price*i.quantity)
+            sum += (i.price*i.quantity)
         return render_template("samplecart.html",userid = userid,username = username,orders = orders,total = sum)
 
 
@@ -241,6 +241,7 @@ def delete(userid,username,pid):
 def owned(username,userid):
     #common for both retialer and the wholesaler
     products = Owned.query.filter_by(userid = userid).all()
+    # return render_template("sample.html",products = products)
     return render_template("myproducts.html",username = username,userid = userid,products = products)
 
 @app.route('/<string:userid>/<string:username>/request-product',methods = ['GET','POST'])
@@ -316,3 +317,8 @@ def pending(userid,username):
         db.session.add(new_order)
         db.session.commit()
         return redirect(url_for('pending',username = username,userid = userid,**request.args))
+
+@app.route('/<string:userid>/<string:username>/history',methods = ['GET','POST'])
+def order_history(username,userid):
+    previous = Request.query.filter_by(senduserid = userid,status = "Accepted")
+    return render_template('history.html',previous = previous)
