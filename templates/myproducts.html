@@ -4,30 +4,122 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Products</title>
+    <link rel="stylesheet" href="../static/css/sitimOrder.css">
+    <title>order</title>
+    <style>
+    .table-container{
+    padding:20px 20px 20px 20px;
+    margin:40px auto 0;
+    width:100%;
+}
+.table-container h2{
+    font-size: 30px;
+    text-align: center;
+    padding: 0px 0px 0px 0px;
+    color: rgb(0, 183, 255);
+}
+.table{
+    width:100%;
+    border-collapse:collapse;
+    
+}
+.table thead{
+    background-color:orange;
+}
+.table thead tr th{
+    font-size: 17px;
+    font-weight: medium;
+    letter-spacing:0.35px;
+    padding:14px;
+    vertical-align:top;
+    border:1px solid rgb(200, 188, 188);
+}
+.table tbody tr td{
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing:0.35px;
+    padding:8px;
+    text-align: center;
+    border:1px solid rgb(196, 188, 188);
+    
+}
+.table tbody tr td .btn{
+    width: 130px;
+    padding:7px 7px 7px 7px;
+    color: white;
+    display: inline-block;
+    background-color: rgb(9, 152, 9);
+    font-weight: medium;
+    border-radius:5px;
+    user-select: none;
+    border:none;
+}
+.table tbody tr td .btn:hover{
+    background-color: rgb(255, 217, 80);
+}
+.btn:hover{
+    background-color: rgb(255, 217, 80); 
+}
+.btn{
+    
+    width: 130px;
+    padding:7px 7px 7px 7px;
+    color: white;
+    display: inline-block;
+    background-color: rgb(9, 152, 9);
+    font-weight: medium;
+    border-radius:5px;
+    user-select: none;
+    border:none;
+}
+    </style>
 </head>
 <body>
     <h3>{{username}}</h3> 
     <!-- displaying username -->
     <h3>{{userid}}</h3>
     <!-- displaying userid -->
-    <table class="products" >
-        <thead>
-            <tr>
-                <td>Product Name</td>
+    <div class="table-container"><h2>Order table</h2>
+            
+                <table class="table">
+                    
+                    <thead>
+                    <tr>
+                        <td>Product Name</td>
                 <td>Available</td>
                 <td>Price</td>
-            </tr>
-        </thead>
-        <tbody>
-            {%for product in products %}
-                <tr>
-                    <td>{{ product['pname'] }}</td>
-                    <td>{{ product['quantity'] }}</td>
-                    <td>{{ product['price'] }}</td>
-                </tr>
-            {%endfor%}
-        </tbody>
-    </table>
-</body>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    {% for owned_product in owned_products %}
+                        
+                    {%for product in products %}
+                    <tr>
+                        <td>{{ product['pname'] }}</td>
+                        <td>{{ product['quantity'] }}</td>
+                        <td>{{ product['price'] }}</td>
+                    </tr>
+                {%endfor%}
+                    {%endfor%}
+
+                </tbody>
+                </table>
+                <br>
+                
+            <!-- <a href="{{url_for('cart',username = username,userid = userid,**request.args)}}" class="btn"> Cart</a> -->
+            <br><br>
+            <a href="{{url_for('home',username = username,userid = userid,**request.args)}}" class="btn">Go back</a>
+            <script>
+                function myFunction() {
+                  const inpObj = document.getElementById("id1");
+                  if (!inpObj.checkValidity()) {
+                    document.getElementById("demo").innerHTML = inpObj.validationMessage;
+                  } else {
+                    document.getElementById("demo").innerHTML = "Input OK";
+                  } 
+                } 
+                </script>
+        </div>
+        </body>
 </html>

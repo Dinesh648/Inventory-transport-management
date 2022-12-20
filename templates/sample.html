@@ -8,8 +8,12 @@
 </head>
 <body>
     <p>Getting data....</p>
-        <!-- {%for owned in owned_products%}
-            {{owned['pname']}}
-        {%endfor%}   -->
-    {{orders}}
+    <!-- {%for owned in owned_products%}
+        {{owned['pid']}}
+    {%endfor%} -->
+
+{{orders}}
+{{orders[0]['price']}}
+{{orders[0]['quantity']}}
+  
 </html>

@@ -226,14 +226,14 @@
                                                                     <form action="/{{userid}}/{{username}}/cart">
                                                                         <tr>
                                                                             <td class="align-middle text-center">
-                                                                                <a href="{{url_for('delete',userid = userid,username = username, pid = order[1]['pid'],**request.args)}}">Delete</a>
+                                                                                <a href="{{url_for('delete',userid = userid,username = username, pid = order['pid'],**request.args)}}">Delete</a>
                                                                             </td>
                                                                             <td>
                                                                                 
                                                                             </td>
-                                                                            <td class="align-middle text-left">{{ order[1]['pname'] }}</td>
-                                                                            <td class="align-middle text-center">{{ order[0]['quantity'] }} </td>
-                                                                            <td class="align-middle text-right">{{ order[0]['price']*order[0]['quantity'] }} </td>
+                                                                            <td class="align-middle text-left">{{ order['pname'] }}</td>
+                                                                            <td class="align-middle text-center">{{ order['quantity'] }} </td>
+                                                                            <td class="align-middle text-right">{{ order['price']*order['quantity'] }} </td>
                                                                         </tr>
                                                                     </form>
                                                                     {%endfor%}

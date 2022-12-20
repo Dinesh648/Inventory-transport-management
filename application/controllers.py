@@ -221,17 +221,17 @@ def order(username,userid):
 @app.route("/<string:userid>/<string:username>/cart",methods = ['GET','POST'])
 def cart(username,userid):
     if request.method == "GET":
-        orders = db.session.query(Orders,Products).join(Products).filter(Orders.pid == Products.pid,Orders.userid == userid).all()
+        orders = Request.query.filter_by(senduserid = userid,status = "Accepted").all()
         sum = 0
         for i in orders:
-            sum+=(i[0].price*i[0].quantity)
+            sum+=(i.price*i.quantity)
         return render_template("samplecart.html",userid = userid,username = username,orders = orders,total = sum)
 
 
 @app.route('/<string:userid>/<string:username>/<int:pid>/delete',methods = ['GET','POST'])
 def delete(userid,username,pid):
     if request.method == "GET":
-        item_to_delete = Orders.query.filter_by(userid=userid,pid = pid).first()
+        item_to_delete = Request.query.filter_by(senduserid=userid,pid = pid).first()
         # return render_template("sample.html",orders = item_to_delete)
         db.session.delete(item_to_delete)
         db.session.commit()
@@ -252,19 +252,33 @@ def make_request(username,userid):
     elif "w" in userid:
         likeString = "'%" + "m" + "%'"
         owned_products = db.session.query(Owned).filter(Owned.userid.ilike("%"+ "m" +"%")).all()
+    
+    listing = []
+    for owned in owned_products:
+        listing.append(owned)
+    
+    if request.method == "GET":  
+        pidlist = []
+        displayid = []
+        products_to_display = []  
+        product_req = Request.query.filter_by(senduserid = userid).all()
         
-        
-    if request.method == "GET":
-        for i in owned_products:
-        
-            requested_products = db.session.query(Request).filter(Request.pid == i.pid).first()
-            if(i.pid == requested_products.pid):
-                owned_products.remove(i)
-        return render_template("placerequest.html",userid = userid, username =username,owned_products = owned_products)
+        if len(product_req) == 0:
+            products_to_display = owned_products
+        else:
+            for i in product_req:
+                for j in owned_products:
+                    if i.pid == j.pid:
+                        pidlist.append(i)
+                    else:
+                        displayid.append(j)
+            products_to_display = displayid
+               
+        return render_template("placerequest.html",userid = userid, username =username,owned_products = products_to_display)
     elif request.method == "POST":
         # product = owned_products[1].pname
         # got = request.form[product]
-        # return render_template("sample.html",got=got)
+        # return render_template("sample.html",got=got,name = product)
         for owned in owned_products:
             try:
                 if int(request.form[owned.pname]) != 0:
@@ -280,7 +294,7 @@ def make_request(username,userid):
                     db.session.commit()
             except:
                 continue
-        return redirect(url_for('home',userid = userid,username = username,**request.args))
+        return redirect(url_for('make_request',userid = userid,username = username,**request.args))
 #to check what products need to be accepted in pending
 
 @app.route('/<string:userid>/<string:username>/checking-request',methods = ['GET','POST'])
