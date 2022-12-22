@@ -1,0 +1,142 @@
+body{
+    margin-top:20px;
+    background-color:#c4d7d9;
+   
+    width:100%;
+    height: 100%;
+    
+  
+}
+/*==================================================
+  Newsfeed Left Sidebar
+  ==================================================*/
+
+/*Profile Card CSS*/
+
+.profile-card{
+  background: linear-gradient(to bottom,rgb(229, 226, 226),rgb(25, 67, 67));
+  background-size: cover;
+  width: 97%;
+  min-height: 80px;
+  border-radius: 4px;
+  padding: 20px 20px;
+  color: #fff;
+  margin: 10px ;
+}
+
+.profile-card img{
+  border: 7px solid #fff;
+  float: left;
+  margin-right: 20px;
+  position: relative;
+  top: 0px;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.profile-card h5 a{
+  font-size: 15px;
+}
+
+.profile-card a{
+  font-size: 12px;
+}
+
+/*Newsfeed Links CSS*/
+
+ul.nav-news-feed{
+  padding-left: 40px;
+  padding-right: 40px;
+  margin: 20px 150px 0 110px;
+    background:#fff;
+  padding-top:20px;
+  padding-bottom: 100px;
+  width:80%;
+  flex: left;
+  box-shadow: 0px 5px 5px 5px rgb(97, 93, 93);
+}
+
+ul.nav-news-feed li{
+  list-style: none;
+  display: block;
+  padding: 15px 15px;
+}
+
+ul.nav-news-feed li div{
+  position: relative;
+  margin-left: 30px;
+  }
+
+ul.nav-news-feed li div::after{
+  content: "";
+  width: 100%;
+  height: 1px;
+  border-top: 1px solid #c1e6ec;
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+}
+
+ul.nav-news-feed li a{
+    letter-spacing:1px;
+    line-height: 30px ;
+    color: #333f49;}
+
+ul.nav-news-feed li i{
+  font-size: 18px;
+  margin-right: 15px;
+  float: left;
+}
+
+ul.nav-news-feed i.map-marker{color: #8dc63f;}
+
+ul.nav-news-feed i.icon2{color: #662d91;}
+
+ul.nav-news-feed i.icon3{color: #ee2a7b;}
+
+ul.nav-news-fee i.icon4{color: #f7941e;}
+
+ul.nav-news-fee i.con5{color: #1c75bc;}
+
+ul.nav-news-feed i.icon6{color: #9e1f63;}
+
+/*Chat Block CSS*/
+
+#chat-block{
+  margin: 0 0 40px 0;
+  text-align: center;
+  background:#fff;
+  padding-top:20px;
+}
+
+#chat-block .title{
+  background: #8dc63f;
+  padding: 2px 20px;
+  width: 70%;
+  height: 30px;
+  border-radius: 15px;
+  position: relative;
+  margin: 0 auto 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+
+.list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+}
+
+.list-inline>li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.text-white {
+    color: #fff;
+}
