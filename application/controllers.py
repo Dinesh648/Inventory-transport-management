@@ -1,5 +1,5 @@
 from flask import Flask, request,Blueprint, redirect,url_for,flash,json,jsonify,session
-
+from sqlalchemy import text
 from flask_login import LoginManager, login_user, login_required, logout_user
 
 from flask import render_template
@@ -22,12 +22,9 @@ def index():
 @app.route('/<string:userid>/<string:username>/home', methods=['GET'])
 @login_required
 def home(userid,username):
-    if('m' in userid):
-        return render_template('profile.html',userid = userid,username = username)
-    elif('r' in userid):
-        return render_template('retailerprofile.html',userid = userid,username = username)
-    elif('w' in userid):
-        return render_template('wholesalerprofile.html',userid = userid,username  = username)
+    
+    return render_template('profile.html',userid = userid,username = username)
+    
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -226,6 +223,11 @@ def cart(username,userid):
         for i in orders:
             sum += (i.price*i.quantity)
         return render_template("samplecart.html",userid = userid,username = username,orders = orders,total = sum)
+    elif request.method == "POST":
+        address = request.form['address']
+        
+        flash("Your address has been added!!!")
+        return redirect(url_for('cart',username = username,userid = userid))
 
 
 @app.route('/<string:userid>/<string:username>/<int:pid>/delete',methods = ['GET','POST'])
@@ -245,7 +247,7 @@ def owned(username,userid):
     return render_template("myproducts.html",username = username,userid = userid,products = products)
 
 @app.route('/<string:userid>/<string:username>/request-product',methods = ['GET','POST'])
-def make_request(username,userid):
+def make_request(userid,username):
     if "r" in userid:
         likeString = "'%" + "w" + "%'"
         owned_products = db.session.query(Owned).filter(Owned.userid.ilike("%"+ "w" +"%")).all()
@@ -254,35 +256,47 @@ def make_request(username,userid):
         likeString = "'%" + "m" + "%'"
         owned_products = db.session.query(Owned).filter(Owned.userid.ilike("%"+ "m" +"%")).all()
     
-    listing = []
-    for owned in owned_products:
-        listing.append(owned)
-    
-    if request.method == "GET":  
-        pidlist = []
-        displayid = []
-        products_to_display = []  
-        product_req = Request.query.filter_by(senduserid = userid).all()
+    if request.method == "GET":
+        present_requests = Request.query.filter_by(senduserid = userid).all()
+        display_options = []
+        req_id = []
+        own = []
+        for req in present_requests:
+            req_id.append(req.pid)
         
-        if len(product_req) == 0:
-            products_to_display = owned_products
-        else:
-            for i in product_req:
-                for j in owned_products:
-                    if i.pid == j.pid:
-                        pidlist.append(i)
-                    else:
-                        displayid.append(j)
-            products_to_display = displayid
-               
-        return render_template("placerequest.html",userid = userid, username =username,owned_products = products_to_display)
+        for owned in owned_products:
+            own.append(owned.pid)
+
+        for i in own:
+            if i not in req_id:
+                display_options.append(i)
+
+        products_available = []
+        for i in display_options:
+            pro = Owned.query.filter_by(pid = i).one()
+            products_available.append(pro)
+        # if len(present_requests) == 0:
+        #     display_options = owned_products
+        # else:
+        #     for owned in owned_products:                
+        #         for requested in present_requests:
+        #             if requested.pid != owned.pid:
+        #                 display_options.append(owned)
+        
+        # display_options = set(display_options)#to make sure no items are repeated
+        
+        
+        
+        
+        
+        return render_template("placerequest.html",username = username,userid =userid,owned_products = products_available)
     elif request.method == "POST":
         # product = owned_products[1].pname
         # got = request.form[product]
         # return render_template("sample.html",got=got,name = product)
         for owned in owned_products:
             try:
-                if int(request.form[owned.pname]) != 0:
+                if int(request.form[owned.pname]) >= 100:
                     new_request = Request(
                         senduserid = userid,
                         recuserid = owned.userid,
@@ -296,6 +310,8 @@ def make_request(username,userid):
             except:
                 continue
         return redirect(url_for('make_request',userid = userid,username = username,**request.args))
+
+
 #to check what products need to be accepted in pending
 
 @app.route('/<string:userid>/<string:username>/checking-request',methods = ['GET','POST'])
@@ -308,13 +324,21 @@ def pending(userid,username):
         accepted = request.form['product']
         update_request = Request.query.filter_by(pid = accepted,recuserid = userid).first()
         update_request.status = "Accepted"
-        new_order = Orders(
-            userid = update_request.senduserid,
-            pid = accepted,
-            quantity = update_request.quantity,
-            price = update_request.price
+        # new_order = Orders(
+        #     userid = update_request.senduserid,
+        #     pid = accepted,
+        #     quantity = update_request.quantity,
+        #     price = update_request.price
+        # )
+        
+        # db.session.add(new_order)
+        new_transport = Transport(
+            senduserid = update_request.senduserid,
+            #address
+            #address source
+            recuserid = update_request.recuserid
         )
-        db.session.add(new_order)
+        db.session.add(new_transport)
         db.session.commit()
         return redirect(url_for('pending',username = username,userid = userid,**request.args))
 
@@ -322,3 +346,12 @@ def pending(userid,username):
 def order_history(username,userid):
     previous = Request.query.filter_by(senduserid = userid,status = "Accepted")
     return render_template('history.html',previous = previous)
+
+@app.route('/<string:userid>/<string:username>/transport',methods = ['GET','POST'])
+def transport(username,userid):
+    return render_template("trackorder.html")
+
+@app.route('/<string:userid>/<string:username>/paid',methods = ['GET','POST'])
+def paid(username,userid):
+    if request.method == "GET":
+        return render_template("paid.html",username = username,userid = userid)

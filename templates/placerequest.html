@@ -86,7 +86,6 @@
                         <th>Price</th>
                         <th>Available quantity</th>
                         <th>Quantity</th>
-                        <th>cross docking</th>
                         <th>Action</th>
                     </tr>
                     
@@ -101,8 +100,7 @@
                                 <td>{{owned_product['price']}}</td>
                                 <td>{{owned_product['quantity']}}</td>
                                 <td><input class="w-25 pl-1" name={{owned_product['pname']}} value=100 min = "100" type="number"></td>
-                                <td><input type="radio"  name="crossdock">Yes
-                                    <input type="radio" name="crossdock">No</td>
+                                
                                     <td><button type="submit" class="btn" value="Place-request">Place-request</button></td>
                             </tr>
                         </form>

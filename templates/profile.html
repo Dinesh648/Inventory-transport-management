@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/sitimProfile.css">
+    <!-- <link rel="stylesheet" href="../static/css/sitimProfile.css"> -->
+    <!--css file sitimProfile.css-->
     <title>profile</title>
     
 <style>
-    body{
+body{
     margin-top:20px;
-    background:#FAFAFA;
+    background-color:#c4d7d9;
+   
+   
+    
+  
 }
 /*==================================================
   Newsfeed Left Sidebar
@@ -18,15 +23,20 @@
 
 /*Profile Card CSS*/
 
+.container{
+  width: 80%;
+}
 .profile-card{
-  background: linear-gradient(to bottom, orange,orange);
+  background: linear-gradient(to bottom,rgb(229, 226, 226),rgb(25, 67, 67));
   background-size: cover;
-  width: 100%;
-  min-height: 80px;
-  border-radius: 4px;
-  padding: 10px 20px;
+  width: 40%;
+  height: 710px;
+  border-radius: 10px;
+  padding: 20px 20px;
   color: #fff;
-  margin-bottom: 10px;;
+  margin: 10px ;
+  position: relative;
+  left: 150px;
 }
 
 .profile-card img{
@@ -34,54 +44,65 @@
   float: left;
   margin-right: 20px;
   position: relative;
-  top: -30px;
-  height: 70px;
-  width: 70px;
+  top: 0px;
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
 }
 
 .profile-card h5 a{
-  font-size: 15px;
+  font-size: 25px;
 }
 
 .profile-card a{
-  font-size: 12px;
+  font-size: 20px;
 }
 
 /*Newsfeed Links CSS*/
 
 ul.nav-news-feed{
-  padding-left: 20px;
-  padding-right: 20px;
-  margin: 0 0 40px 0;
-    background:#fff;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin: 20px 150px 0 130px;
+  background:#fff;
   padding-top:20px;
+  padding-bottom: 65px;
+  width:20%;
+  align-content: center;
+  box-shadow: 0px 5px 5px 5px rgb(97, 93, 93);
+  position: relative;
+  left: 350px;
+  position: absolute;
+  top: 130px;
+  border-radius: 10px;
 }
 
 ul.nav-news-feed li{
   list-style: none;
   display: block;
-  padding: 15px 0;
+  padding: 15px 15px;
+  
 }
 
 ul.nav-news-feed li div{
   position: relative;
-  margin-left: 30px;
+  margin-left: 50px;
   }
 
 ul.nav-news-feed li div::after{
   content: "";
   width: 100%;
   height: 1px;
-  border-top: 1px solid #dbe5e5;
+  border-top: 1px solid #c1e6ec;
   position: absolute;
   bottom: -15px;
   left: 0;
 }
 
 ul.nav-news-feed li a{
-    letter-spacing:0.4px;
-    color: #4d4e4f;}
+    letter-spacing:1px;
+    line-height: 30px ;
+    color: #333f49;}
 
 ul.nav-news-feed li i{
   font-size: 18px;
@@ -148,21 +169,27 @@ ul.nav-news-feed i.icon6{color: #9e1f63;}
     <div class="row">
         <div class="col-md-4 static">
             <div class="profile-card">
-              <img src="https://www.kindpng.com/picc/m/78-785917_user-login-function-name-avatar-user-icon-hd.png">
-            	<h3><a href="#" class="text-white"><h1> {{ username }}</h1></a>
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width:200px>
+            	<h3><a href="#" class="text-white"><h1>{{username}}</h1></a>
             	<a href="#" class="text-white"><i class="fa fa-envelope"></i>email</a><br>
-              <a href="#" class="text-white"><i class="fa fa-phone-square"></i>phone</a>
+                <!-- <a href="#" class="text-white"><i class="fa fa-phone-square"></i>phone</a> -->
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
-              <li><i class="fa fa-book"></i><div><a href="">Order History</a></div></li>
-              <li><i class="fa fa-credit-card"></i><div><a href="#">Payments</a></div></li>
-              <li><i class="fa fa-map-marker"></i><div><a href="#">Address</a></div></li>
-              <li><i class="fa fa-pending-requests"><div><a href="{{url_for('pending',username = username,userid = userid,**request.args)}}">Pending Requests</a></div></i></li><br>
-              <li><i class="fa fa-ownedproducts"></i><div><a href="{{url_for('owned',username = username,userid = userid)}}">Products</a></div></li>
-              <!-- <li><i class="fa fa-shopping-cart"></i><div><a href="{{ url_for('order',username = username, userid = userid,**request.args) }}">Order bookings</a></div></li> -->
-              <li><i class="fa fa-question-circle"></i><div><a href="#">Help</a></div></li>
-              <li><i class="fa fa-cog"></i><div><a href="#">Settings</a></div></li>
+                {% if 'w' in userid or 'r' in userid%}
+                    <li><i class="fa fa-book"></i><div><a href="{{url_for('order_history',username = username,userid = userid,**request.args)}}">Order History</a></div></li>
+                    <li><i class="fa fa-shopping-cart"></i><div><a href="{{ url_for('make_request',username = username, userid = userid,**request.args) }}">Order bookings</a></div></li>
+                    <li><i class="fa fa-cart"></i><div><a href="{{ url_for('cart',username = username,userid = userid,**request.args) }}">Cart</a></div></li>
+                {% endif %}
+                {% if 'w' in userid or 'm' in userid %}
+                    <li><i class="fa fa-credit-card"></i><div><a href="{{url_for('pending',username = username,userid = userid,**request.args)}}">Pending Requests</a></div></li>
+                {% endif %}
               
+              <li><i class="fa fa-ownedproducts"></i><div><a href="{{url_for('owned',username = username,userid = userid)}}">Products</a></div></li>
+              <li><i class="fa fa-map-marker"></i><div><a href="#">Address</a></div></li>
+              <!-- <li><i class="fa fa-shopping-cart"></i><div><a href="#">Order bookings</a></div></li> -->
+              <li><i class="fa fa-question-circle"></i><div><a href="#">Help</a></div></li>
+              <li><i class="fa fa-cog"></i><div><a href="{{url_for('transport',username = username,userid = userid,**request.args)}}">Track Order</a></div></li>
+              <li><i class="fa fa-power-off"></i><div><a href="#">Log out</a></div></li>
             </ul><!--news-feed links ends-->
            
         </div>

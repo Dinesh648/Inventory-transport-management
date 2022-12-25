@@ -178,14 +178,14 @@
                     <div class="row text-center">
                         <div class="col-sm col-12">
                             <div class="alert alert-primary bg-alert-bg" role="alert">
-                                <a href="#">1 . Please enter your order information</a>
+                                <a href="#">1 . Order Information</a>
                             </div>
                         </div>
-                        <div class="col-sm col-12">
+                        <!-- <div class="col-sm col-12">
                             <div class="alert alert-secondary" role="alert">
                                 <a href="#">2 . Cash Payment</a>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-sm col-12">
                             <div class="alert alert-secondary" role="alert">
                                 <a href="#">3 . Complete</a>
@@ -223,7 +223,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     {%for order in orders%}
-                                                                    <form action="/{{userid}}/{{username}}/cart">
+                                                                    <form action="/{{userid}}/{{username}}/cart" name="form1">
                                                                         <tr>
                                                                             <td class="align-middle text-center">
                                                                                 <a href="{{url_for('delete',userid = userid,username = username, pid = order['pid'],**request.args)}}">Delete</a>
@@ -253,13 +253,13 @@
                                                 </div>
                                                 <a href="{{ url_for('make_request',username = username,userid = userid, **request.args) }}">Add products!!</a>
                                                 <div class="alert alert-secondary border-0 h4 text-center bg-alert rounded-0" role="alert">
-                                                    Orderer information
+                                                    Delivery Address
                                                 </div>
-                                                <form class="needs-validation" novalidate>
+                                                <form class="needs-validation" novalidate name="form2" action="/{{userid}}/{{username}}/cart" method="POST">
                                                     <div class="form-row">
-                                                        <div class="col-md-4 mb-3">
+                                                        <!-- <div class="col-md-4 mb-3">
                                                             <label for="name">Name</label>
-                                                            <input type="text" class="form-control space" id="name" placeholder="please enter your name  . . ." required>
+                                                            <input type="text" class="form-control space" id="name" name="name" placeholder="please enter your name  . . ." required>
                                                             <div class="valid-feedback">
                                                                 Correct format!
                                                             </div>
@@ -269,7 +269,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <label for="email">Email</label>
-                                                            <input type="text" class="form-control space" id="email" placeholder="please enter your email . . ." required>
+                                                            <input type="text" class="form-control space" id="email" name="email" placeholder="please enter your email . . ." required>
                                                             <div class="valid-feedback">
                                                                 Correct format!
                                                             </div>
@@ -279,19 +279,19 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <label for="email">Telephone / Local phone</label>
-                                                            <input type="tel" class="form-control space" id="email" placeholder="please enter your email . . ." required>
+                                                            <input type="tel" class="form-control space" id="email" name="phone" placeholder="please enter your email . . ." required>
                                                             <div class="valid-feedback">
                                                                 Correct format!
                                                             </div>
                                                             <div class="invalid-feedback">
                                                                 Please enter your email . . .
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="form-row">
-                                                        <div class="col-md-4 mb-3">
+                                                        <!-- <div class="col-md-4 mb-3">
                                                             
-                                                            <!--<select class="form-control" id="country . . ." required>
+                                                            <select class="form-control" id="country . . ." required>
                                                                         <option>India</option>
                                                                         <option>Taiwan</option>
                                                                         <option>Japan</option>
@@ -301,27 +301,27 @@
                                                                         <option>French</option>
                                                                         <option>Germany</option>
                                                                         <option>Italy</option>
-                                                                    </select>-->
+                                                                    </select>
                                                             <div class="valid-feedback">
                                                                 Correct format !
                                                             </div>
                                                             <div class="invalid-feedback">
                                                                 Please enter your country . . .
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-4 mb-3">
+                                                        </div> -->
+                                                        <!-- <div class="col-md-4 mb-3">
                                                             <label for="city">City</label>
-                                                            <input type="text" class="form-control space" id="city" placeholder="please enter your city . . ." required>
+                                                            <input type="text" class="form-control space" id="city" name="city" placeholder="please enter your city . . ." required>
                                                             <div class="valid-feedback">
                                                                 Correct format !
                                                             </div>
                                                             <div class="invalid-feedback">
                                                                 Please enter your city . . .
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-4 mb-3">
+                                                        </div> -->
+                                                        <!-- <div class="col-md-4 mb-3">
                                                             <label for="postal">Postal code</label>
-                                                            <!--<select class="form-control" id="country . . ." required>
+                                                            <select class="form-control" id="country . . ." required>
                                                                         <option>990</option>
                                                                         <option>991</option>
                                                                         <option>992</option>
@@ -332,17 +332,17 @@
                                                                         <option>997</option>
                                                                         <option>998</option>
                                                                         <option>999</option>
-                                                                    </select>-->
+                                                                    </select>
                                                             <div class="valid-feedback">
                                                                 Correct format !
                                                             </div>
                                                             <div class="invalid-feedback">
                                                                 Please enter your postal code . . .
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="col-md-12 mb-3">
                                                             <label for="address">Address</label>
-                                                            <input type="text" class="form-control space" id="address" placeholder="please enter your town address . . ." required>
+                                                            <input type="text" class="form-control space" id="address" name="address" placeholder="please enter your town address . . ." required>
                                                             <div class="valid-feedback">
                                                                 Correct format !
                                                             </div>
@@ -351,12 +351,15 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    {% for message in get_flashed_messages()%}
+                                                        {{ message }}
+                                                    {%endfor%}
                                                     <div class="d-flex justify-content-center">
                                                         <button class="btn btn-primary" type="submit">Submit orderer information</button>
                                                     </div>
                                                 </form>
                                                 <div class="list-group mt-5 p-0 justify-content-center" id="allList" role="tablist" style="flex-direction: row;">
-                                                    <a href="#step2" class="list-group-item-dark w-35 py-2  rounded text-center btns" data-toggle="list" role="tab">
+                                                    <a href="#step3" class="list-group-item-dark w-35 py-2  rounded text-center btns" data-toggle="list" role="tab">
                                                         Next <i class="fal fa-arrow-circle-right"></i>
                                                     </a>
                                                 </div>
@@ -368,7 +371,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="step2">
+                <!-- <div class="tab-pane" id="step2">
                     <div class="row text-center">
                         <div class="col-sm col-12">
                             <div class="alert alert-secondary" role="alert">
@@ -422,7 +425,7 @@
                                                     <div class="tab-pane" id="act2">
                                                         <div class="card-body border border-top-0 rounded-bottom">
                                                             <form action="" class="d-sm-flex justify-content-around">
-                                                                <!--<label class="btn btn-dark d-block d-flex justify-content-center">
+                                                                <label class="btn btn-dark d-block d-flex justify-content-center">
                                                                 <input type="radio" name="options" id="option3" class="mrg-ct mr-2">
                                                                 <p class="int-chagne">Taiwan Mobile</p>
                                                                 </label>
@@ -437,7 +440,7 @@
                                                                 <label class="btn btn-dark d-block d-flex justify-content-center">
                                                                 <input type="radio" name="options" id="option3" class="mrg-ct mr-2">
                                                                 <p class="int-chagne">Local Calls</p>
-                                                                </label>-->
+                                                                </label> this was a previous commented
                                                             </form>
                                                             <h5 class="card-title mt-3">Choose you phone tele</h5>
                                                             <p class="card-text text-danger">If you can't use please contact belong to your telecompany thank you</p>
@@ -467,19 +470,19 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="tab-pane" id="step3">
                     <div class="row text-center">
                         <div class="col-sm col-12">
                             <div class="alert alert-secondary" role="alert">
-                                1 . Please enter your order information
+                                <a href="#">1 . Order Information</a>
                             </div>
                         </div>
-                        <div class="col-sm col-12">
+                        <!-- <div class="col-sm col-12">
                             <div class="alert alert-secondary" role="alert">
                                 2 . Cash Payment
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-sm col-12">
                             <div class="alert alert-success bg-alert-bg" role="alert">
                                 3 . Complete
@@ -492,51 +495,48 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h2 class="text-center my-3">Bought information</h2>
-                                        <div>
-                                            <table class="table table-sm">
-                                                <thead>
-                                                    <tr class="ml-3">
-                                                        <th></th>
-                                                        <th class="text-left" width="50%">Product</th>
-                                                        <th class="text-center" width="45%">Pieces</th>
-                                                        <th>Subtotal</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                           
-                                                        </td>
-                                                        <td class="align-middle text-left"> </td>
-                                                        <td class="align-middle text-center"> </td>
-                                                        <td class="align-middle text-right"> </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                            <div class="card-body p-0">
+                                                <div>
+                                                    <table class="table table-sm">
+                                                        <thead>
+                                                            <tr class="ml-3">
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th class="text-left" width="50%">Product</th>
+                                                                <th class="text-center" width="45%">Pieces</th>
+                                                                <th>Subtotal</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {%for order in orders%}
+                                                            <form action="/{{userid}}/{{username}}/cart" name="form1">
+                                                                <tr>
+                                                                    <td class="align-middle text-center">
+                                                                        <a href="{{url_for('delete',userid = userid,username = username, pid = order['pid'],**request.args)}}">Delete</a>
+                                                                    </td>
+                                                                    <td>
+                                                                        
+                                                                    </td>
+                                                                    <td class="align-middle text-left">{{ order['pname'] }}</td>
+                                                                    <td class="align-middle text-center">{{ order['quantity'] }} </td>
+                                                                    <td class="align-middle text-right">{{ order['price']*order['quantity'] }} </td>
+                                                                </tr>
+                                                            </form>
+                                                            {%endfor%}
                                                             
-                                                        </td>
-                                                        <td class="align-middle text-left"> </td>
-                                                        <td class="align-middle text-center"> </td>
-                                                        <td class="align-middle text-right"> </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                           
-                                                        </td>
-                                                        <td class="align-middle text-left"> </td>
-                                                        <td class="align-middle text-center"> </td>
-                                                        <td class="align-middle text-right"> </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3" class="align-middle text-right">Freight</td>
-                                                        <td class="align-middle text-right"> </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3" class="align-middle text-right">Total</td>
-                                                        <td class="align-middle text-right"> </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                            <tr>
+                                                                <td colspan="4" class="align-middle text-right">Freight</td>
+                                                                <td class="align-middle text-right"> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="4" class="align-middle text-right">Total</td>
+                                                                <td class="align-middle text-right">{{total}} </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                         <h2 class="text-center my-3">Profile</h2>
                                         <div class="">
@@ -566,7 +566,13 @@
                                 </div>
                                 <div class="list-group mt-5 p-0 mb-3 justify-content-center" id="allList" role="tablist" style="flex-direction: row;">
                                     <a href="#step1" class="list-group-item-dark ml-3 w-35 py-2  rounded text-center btns home" data-toggle="list" role="tab">
-                                        <i class="fas fa-home"></i> Back
+                                        <form action="/{{userid}}/{{username}}/cart" method="POST">
+                                            <!-- <div class="d-flex justify-content-center">
+                                                
+                                            </div> -->
+                                            <a href="{{url_for('paid',username = username,userid = userid,**request.args)}}">Pay</a>
+                                        </form>
+                                        <!-- <i class="fas fa-home"></i> -->
                                     </a>
                                 </div>
                             </div>

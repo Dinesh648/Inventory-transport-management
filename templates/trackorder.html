@@ -7,7 +7,7 @@
     <!--css file sitim.css-->
     <link rel="stylesheet" href="../static/css/sitimTrack.css">
     <title>order</title>
-    <!--<style>
+    <style>
         
 .trackcard{
     margin: auto;
@@ -193,7 +193,7 @@ h4{
 #progressbar li.active:after {
     background: rgb(252, 103, 49);
 }
-    </style>-->
+    </style>
 </head>   
 <body>
 
@@ -202,12 +202,9 @@ h4{
         <div class="title">Purchase Reciept</div>
         <div class="info">
             <div class="row">
-                <div class="col-7">
-                    <span id="heading">Order Date</span><br>
-                    <span id="details"> </span>
-                </div>
+                
                 <div class="col-5 pull-right">
-                    <span id="heading">Order No.</span><br>
+                    <span id="heading">Order ID:</span><br>
                     <span id="details"> </span>
                 </div>
             </div>      
@@ -226,33 +223,37 @@ h4{
                     <span id="name">Shipping charges</span>
                 </div>
                 <div class="col-3">
-                    <span id="price">Rs. </span>
+                    <span id="price">Rs. 1000 </span>
                 </div>
             </div>
         </div>
         <div class="total">
             <div class="row">
                 <div class="col-9"></div>
-                <div class="col-3"><big>&pound;262.99</big></div>
+                <div class="col-3"><big>Rs. 262.99</big></div>
             </div>
         </div>
         <div class="tracking">
             <div class="title"><br>Tracking Order</div>
-            <h4>Delivery Expected by </h4>
+            <!-- <h4>Delivery Expected by </h4> -->
         </div>
         <div class="progress-track">
-            <ul id="progressbar">
+            <!-- <ul id="progressbar">
                 <li class="step0 active " id="step1">Ordered</li>
                 <li class="step0 active text-center" id="step2">Shipped</li>
                 <li class="step0 active text-right" id="step3">On the way</li>
                 <li class="step0 text-right" id="step4">Delivered</li>
-            </ul>
+            </ul> -->
+            <h4 id = "step1">Truck No: </h4>
+            <h4>Driver Name: </h4>
+            <h4>From: </h4>
+            <h4>Receiver: </h4>
         </div>
         
 
         <div class="footer">
             <div class="row">
-                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/YBWc55P.png"></div>
+                
                 <div class="col-10">Want any help? Please &nbsp;<a> contact us</a></div>
             </div>
             

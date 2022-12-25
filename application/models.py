@@ -99,9 +99,9 @@ class Request(db.Model,UserMixin):
 
 class Transport(db.Model,UserMixin):
     __tablename__ = "transport"
-    truckid = db.Column(db.Integer,primary_key = True)
-    drivername = db.Column(db.String(40))
+    senduserid = db.Column(db.String(40),db.ForeignKey('requests.senduserid'))
+    tnum = db.Column(db.Integer,primary_key = True)
     destination = db.Column(db.String(100))
-    recuserid = db.Column(db.String(50))
+    recuserid = db.Column(db.String(50),db.ForeignKey('requests.recuserid'))
     def get_id(self):
         return self.recuserid

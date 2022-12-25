@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/sitimProfile.css">
+    <title>profile</title>
+    
+<style>
+    body{
+    margin-top:20px;
+    background:#FAFAFA;
+}
+/*==================================================
+  Newsfeed Left Sidebar
+  ==================================================*/
+
+/*Profile Card CSS*/
+
+.profile-card{
+  background: linear-gradient(to bottom, orange,orange);
+  background-size: cover;
+  width: 100%;
+  min-height: 80px;
+  border-radius: 4px;
+  padding: 10px 20px;
+  color: #fff;
+  margin-bottom: 10px;;
+}
+
+.profile-card img{
+  border: 7px solid #fff;
+  float: left;
+  margin-right: 20px;
+  position: relative;
+  top: -30px;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+}
+
+.profile-card h5 a{
+  font-size: 15px;
+}
+
+.profile-card a{
+  font-size: 12px;
+}
+
+/*Newsfeed Links CSS*/
+
+ul.nav-news-feed{
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 0 40px 0;
+    background:#fff;
+  padding-top:20px;
+}
+
+ul.nav-news-feed li{
+  list-style: none;
+  display: block;
+  padding: 15px 0;
+}
+
+ul.nav-news-feed li div{
+  position: relative;
+  margin-left: 30px;
+  }
+
+ul.nav-news-feed li div::after{
+  content: "";
+  width: 100%;
+  height: 1px;
+  border-top: 1px solid #dbe5e5;
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+}
+
+ul.nav-news-feed li a{
+    letter-spacing:0.4px;
+    color: #4d4e4f;}
+
+ul.nav-news-feed li i{
+  font-size: 18px;
+  margin-right: 15px;
+  float: left;
+}
+
+ul.nav-news-feed i.map-marker{color: #8dc63f;}
+
+ul.nav-news-feed i.icon2{color: #662d91;}
+
+ul.nav-news-feed i.icon3{color: #ee2a7b;}
+
+ul.nav-news-fee i.icon4{color: #f7941e;}
+
+ul.nav-news-fee i.con5{color: #1c75bc;}
+
+ul.nav-news-feed i.icon6{color: #9e1f63;}
+
+/*Chat Block CSS*/
+
+#chat-block{
+  margin: 0 0 40px 0;
+  text-align: center;
+  background:#fff;
+  padding-top:20px;
+}
+
+#chat-block .title{
+  background: #8dc63f;
+  padding: 2px 20px;
+  width: 70%;
+  height: 30px;
+  border-radius: 15px;
+  position: relative;
+  margin: 0 auto 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+
+.list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+}
+
+.list-inline>li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.text-white {
+    color: #fff;
+}
+</style>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 static">
+            <div class="profile-card">
+              <img src="https://www.kindpng.com/picc/m/78-785917_user-login-function-name-avatar-user-icon-hd.png">
+            	<h3><a href="#" class="text-white"><h1> {{ username }}</h1></a>
+            	<a href="#" class="text-white"><i class="fa fa-envelope"></i>email</a><br>
+              <a href="#" class="text-white"><i class="fa fa-phone-square"></i>phone</a>
+            </div><!--profile card ends-->
+            <ul class="nav-news-feed">
+              <li><i class="fa fa-book"></i><div><a href="{{url_for('order_history',username = username,userid = userid,**request.args)}}">Order History</a></div></li>
+              <li><i class="fa fa-"><div><a href="{{url_for('pending',username = username,userid = userid,**request.args)}}">Pending Requests</a></div></i></li><br>
+              <li><i class="fa fa-credit-card"></i><div><a href="#">Payments</a></div></li>
+              <li><i class="fa fa-map-marker"></i><div><a href="#">Address</a></div></li>
+              <li><i class="fa fa-ownedproducts"></i><div><a href="{{url_for('owned',username = username,userid = userid,**request.args)}}">Products</a></div></li>
+              <li><i class="fa fa-shopping-cart"></i><div><a href="{{ url_for('make_request',username = username, userid = userid,**request.args) }}">Order bookings</a></div></li>
+              <li><i class="fa fa-cart"></i><div><a href="{{ url_for('cart',username = username,userid = userid,**request.args) }}">Cart</a></div></li>
+              <li><i class="fa fa-question-circle"></i><div><a href="#">Help</a></div></li>
+              <li><i class="fa fa-cog"></i><div><a href="#">Settings</a></div></li>
+              
+            </ul><!--news-feed links ends-->
+           
+        </div>
+	</div>
+</div>
+</body>
+</html>
