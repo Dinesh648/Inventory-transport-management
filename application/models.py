@@ -106,3 +106,9 @@ class Transport(db.Model,UserMixin):
     buyerid = db.Column(db.String(50))
     def get_id(self):
         return self.recuserid
+
+class Location(db.Model,UserMixin):
+    __tablename__ = "location"
+    userid = db.Column(db.String(40),primary_key = True)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)

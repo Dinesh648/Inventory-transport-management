@@ -3,3 +3,4 @@ sqlalchemy
 flask_sqlalchemy
 flask_login
 werkzeug
+pyrebase

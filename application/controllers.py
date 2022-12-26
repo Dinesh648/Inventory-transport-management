@@ -1,9 +1,11 @@
 from flask import Flask, request,Blueprint, redirect,url_for,flash,json,jsonify,session
+
 from sqlalchemy import text
 from flask_login import LoginManager, login_user, login_required, logout_user
 
 from flask import render_template
 from flask import current_app as app
+from main import dab
 from .database import db
 from .models import *
 from .models import login_manager
@@ -91,7 +93,13 @@ def register():
         password = request.form['password']
         confirm_password = request.form['confirm-password']
         organization = request.form['organization']
-
+        address = request.form['address']
+        phone_number = request.form['pnum']
+        latitude = request.form['latitude']
+        longitude = request.form['longitude']
+        dab.child("organisation").child(cname).set({"address":address,"phone_number":phone_number})
+        
+        
         if username and email and password and confirm_password:
             if password == confirm_password:
                 hashed_password = generate_password_hash(
@@ -108,6 +116,12 @@ def register():
                             cname = cname,
                             password = hashed_password,
                         )
+                        new_location = Location(
+                            userid = mid,
+                            latitude = latitude,
+                            longitude = longitude
+                        )
+                        db.session.add(new_location)
                         db.session.add(new_manufacturer)
                         db.session.commit()
                     except IntegrityError:
@@ -124,6 +138,12 @@ def register():
                             cname = cname,
                             password = hashed_password,
                         )
+                        new_location = Location(
+                            userid = wid,
+                            latitude = latitude,
+                            longitude = longitude
+                        )
+                        db.session.add(new_location)
                         db.session.add(new_wholesaler)
                         db.session.commit()
                     except IntegrityError:
@@ -140,6 +160,12 @@ def register():
                             cname = cname,
                             password = hashed_password,
                         )
+                        new_location = Location(
+                            userid = rid,
+                            latitude = latitude,
+                            longitude = longitude
+                        )
+                        db.session.add(new_location) 
                         db.session.add(new_retailer)
                         db.session.commit()
                     except IntegrityError:
@@ -361,6 +387,7 @@ def transport(username,userid):
 def paid(username,userid):
     products_to_buy = Request.query.filter_by(senduserid = userid, status = "Accepted").all()
     if request.method == "GET":
+        sellerlist = []
         for i in products_to_buy:
             new_order = Orders(
                 userid = userid,
@@ -369,9 +396,65 @@ def paid(username,userid):
                 price = i.price
             )
             db.session.add(new_order)
-        assignment = Transport.query.filter_by(buyerid = userid).one()
-        assignment.state = "Assigned"   
+            if i.recuserid not in sellerlist:
+                sellerlist.append(i.recuserid)#taking in all the sellers that the buyer is buying from
+        assignment = Transport.query.filter_by(buyerid = userid).all()
+        for i in assignment:
+            i.state = "Assigned"   
         db.session.commit()
         
         
+        trucknum = "KA05MA"
+        num = 1234
+        pnum = 100
+        
+        dnum = 100
+        for i in sellerlist:
+            if 'm' in i:
+                product_list = Request.query.filter_by(recuserid = i,status = "Accepted").all()
+                seller = Manufacturer.query.filter_by(mid = i).one()
+                truck = str(trucknum + str(num+1))
+                sellername = seller.username
+                location_details = Location.query.filter_by(userid = i).one()
+                currentlat = 0.0
+                currentlong = 0.0
+                destination = Transport.query.filter_by(buyerid = userid).first()
+                dest_address = destination.destination
+                buyer_location = Location.query.filter_by(userid = userid).one()
+                buyerlat = buyer_location.latitude
+                buyerlong = buyer_location.longitude
+                driver = "D" + str(dnum+1)
+                # dab.child("trucks").child(sellername).child(truck).child("cross_dock")
+                for i in product_list:
+                    quantity = i.quantity
+                    pname = i.pname
+                    name = str("P"+str(pnum+1))
+                    dab.child("trucks").child(sellername).child(truck).child("goods").set({name:str(pname,quantity)})
+                
+                dab.child("trucks").child(sellername).child(truck).set({"curr_lat":str(0.0),"curr_long":str(0.0),"dest_address":dest_address,"dest_lat":buyerlat,"dest_long":buyerlong,"name":driver, "vehicle_num":truck})
+            elif 'w' in i:
+                product_list = Request.query.filter_by(recuserid = i,status = "Accepted").all()
+                seller = Wholesaler.query.filter_by(wid = i).one()
+                truck = str(trucknum + str(num+1))
+                sellername = seller.username
+                location_details = Location.query.filter_by(userid = i).one()
+                currentlat = 0.0
+                currentlong = 0.0
+                destination = Transport.query.filter_by(buyerid = userid).first()
+                dest_address = destination.destination
+                buyer_location = Location.query.filter_by(userid = userid).one()
+                buyerlat = buyer_location.latitude
+                buyerlong = buyer_location.longitude
+                driver = "D" + str(dnum+1)
+                # dab.child("trucks").child(sellername).child(truck).child("cross_dock")
+                for i in product_list:
+                    quantity = i.quantity
+                    pname = i.pname
+                    name = "P"+str(pnum+1)
+                    insertstring = str(pname)+","+str(quantity)
+                    dab.child("trucks").child(sellername).child(truck).child("goods").set({name:(insertstring)})
+                
+                dab.child("trucks").child(sellername).child(truck).set({"curr_lat":str(0.0),"curr_long":str(0.0),"dest_address":dest_address,"dest_lat":buyerlat,"dest_long":buyerlong,"name":driver, "vehicle_num":truck})
+        
         return render_template("paid.html",username = username,userid = userid)
+       
