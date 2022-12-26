@@ -74,6 +74,7 @@ class Products(db.Model, UserMixin):
 
 class Orders(db.Model, UserMixin):
     __tablename__ = "orders"
+    orderid = db.Column(db.Integer,primary_key = True)
     userid = db.Column(db.String(40))
     pid = db.Column(db.Integer, db.ForeignKey('products.pid'),primary_key = True)
     quantity = db.Column(db.Integer)
@@ -99,9 +100,9 @@ class Request(db.Model,UserMixin):
 
 class Transport(db.Model,UserMixin):
     __tablename__ = "transport"
-    senduserid = db.Column(db.String(40),db.ForeignKey('requests.senduserid'))
+    state = db.Column(db.String(40),default = 'Not-assigned')
     tnum = db.Column(db.Integer,primary_key = True)
     destination = db.Column(db.String(100))
-    recuserid = db.Column(db.String(50),db.ForeignKey('requests.recuserid'))
+    buyerid = db.Column(db.String(50))
     def get_id(self):
         return self.recuserid

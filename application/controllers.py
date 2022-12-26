@@ -227,6 +227,12 @@ def cart(username,userid):
         address = request.form['address']
         
         flash("Your address has been added!!!")
+        new_transport = Transport(
+                buyerid  = userid,
+                destination = address,
+            )
+        db.session.add(new_transport)
+        db.session.commit()
         return redirect(url_for('cart',username = username,userid = userid))
 
 
@@ -332,26 +338,40 @@ def pending(userid,username):
         # )
         
         # db.session.add(new_order)
-        new_transport = Transport(
-            senduserid = update_request.senduserid,
-            #address
-            #address source
-            recuserid = update_request.recuserid
-        )
-        db.session.add(new_transport)
+        
         db.session.commit()
         return redirect(url_for('pending',username = username,userid = userid,**request.args))
 
 @app.route('/<string:userid>/<string:username>/history',methods = ['GET','POST'])
 def order_history(username,userid):
-    previous = Request.query.filter_by(senduserid = userid,status = "Accepted")
+    # previous = Request.query.filter_by(senduserid = userid,status = "Accepted")
+    previous = Orders.query.filter_by(userid = userid)
     return render_template('history.html',previous = previous)
 
 @app.route('/<string:userid>/<string:username>/transport',methods = ['GET','POST'])
 def transport(username,userid):
-    return render_template("trackorder.html")
+    info = Transport.query.filter_by(buyerid = userid,state = "Assigned").one()
+    sumtotal = Orders.query.with_entities(Orders.quantity,Orders.price).filter_by(userid = userid).all()
+    summing = 0
+    for i in sumtotal:
+        summing += (i.quantity * i.price)
+    return render_template("trackorder.html",tnum = info.tnum,receiver = info.buyerid,final = summing + 100,amount = summing)
 
 @app.route('/<string:userid>/<string:username>/paid',methods = ['GET','POST'])
 def paid(username,userid):
+    products_to_buy = Request.query.filter_by(senduserid = userid, status = "Accepted").all()
     if request.method == "GET":
+        for i in products_to_buy:
+            new_order = Orders(
+                userid = userid,
+                pid = i.pid,
+                quantity = i.quantity,
+                price = i.price
+            )
+            db.session.add(new_order)
+        assignment = Transport.query.filter_by(buyerid = userid).one()
+        assignment.state = "Assigned"   
+        db.session.commit()
+        
+        
         return render_template("paid.html",username = username,userid = userid)
