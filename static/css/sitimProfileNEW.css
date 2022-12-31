@@ -1,0 +1,221 @@
+html, body{
+    margin-top:20px;
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    
+}
+/*==================================================
+  Newsfeed Left Sidebar
+  ==================================================*/
+
+/*Profile Card CSS*/
+
+.profile-card{
+  margin-top: 20px;
+  position: relative;
+}
+
+.profile-card a{
+  text-decoration: none;
+  position: absolute;
+}
+
+.profile-card button{
+  position: relative;
+  float: right;
+  margin-right: 135px;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: "Poppins", sans-serif;
+  margin-top: 35px;
+  border: none;
+  border-radius: 10px;
+  background-color: #AA0000;
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
+}
+
+.welcome{
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  background-color: black;
+}
+
+.text-dark{
+  color: black;
+  font-family: "Poppins", sans-serif;
+}
+
+.container_indi{
+  margin-top: 30px;
+  float: left;
+  align-content: center;
+  text-align: center;
+  
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 20px;
+  padding: 30px;
+  width: fit-content;
+  color: black;
+  font-size: 1.5em;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
+}
+
+.overall_container{
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  margin-bottom: 30px;
+}
+
+.container_indi a{
+  text-decoration: none;
+}
+
+.container_indi:hover, .container_indi:focus, .container_indi:active, .profile-card button:hover, .profile-card button:focus, .profile-card button:active{
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+  -webkit-transform: scale(1.02);
+  transform: scale(1.02);
+}
+
+
+
+.credits{
+  width: 100%;
+  background-color: black;
+  height: 50px;
+}
+
+
+
+
+
+
+/*
+
+ul.nav-news-feed{
+  padding-left: 40px;
+  padding-right: 40px;
+  margin: 20px 150px 0 110px;
+    background:#fff;
+  padding-top:20px;
+  padding-bottom: 100px;
+  width:80%;
+  flex: left;
+  box-shadow: 0px 5px 5px 5px rgb(97, 93, 93);
+}
+
+ul.nav-news-feed li{
+  list-style: none;
+  display: block;
+  padding: 15px 15px;
+}
+
+ul.nav-news-feed li div{
+  position: relative;
+  margin-left: 30px;
+  }
+
+ul.nav-news-feed li div::after{
+  content: "";
+  width: 100%;
+  height: 1px;
+  border-top: 1px solid #c1e6ec;
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+}
+
+ul.nav-news-feed li a{
+    letter-spacing:1px;
+    line-height: 30px ;
+    color: #333f49;}
+
+ul.nav-news-feed li i{
+  font-size: 18px;
+  margin-right: 15px;
+  float: left;
+}
+
+ul.nav-news-feed i.map-marker{color: #8dc63f;}
+
+ul.nav-news-feed i.icon2{color: #662d91;}
+
+ul.nav-news-feed i.icon3{color: #ee2a7b;}
+
+ul.nav-news-fee i.icon4{color: #f7941e;}
+
+ul.nav-news-fee i.con5{color: #1c75bc;}
+
+ul.nav-news-feed i.icon6{color: #9e1f63;}
+
+
+
+#chat-block{
+  margin: 0 0 40px 0;
+  text-align: center;
+  background:#fff;
+  padding-top:20px;
+}
+
+#chat-block .title{
+  background: #8dc63f;
+  padding: 2px 20px;
+  width: 70%;
+  height: 30px;
+  border-radius: 15px;
+  position: relative;
+  margin: 0 auto 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+
+.list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+}
+
+.list-inline>li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.text-white {
+    color: #fff;
+}
+
+*/
