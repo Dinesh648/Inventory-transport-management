@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/sitimProfileNEW.css"> 
+    <!--css file sitimProfile.css-->
+    <title>profile</title>
+    
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<link href="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 static">
+            <div class="profile-card">
+              <img src="../static/images/profile_icon.png" height="100px" width="100px" style="float: left; margin-left: 50px;"/> 
+            	<a href="#" class="text-dark" style="float: left;"><h1>{{username}}</h1></a>
+              <button><b>Log Out</b></button>
+              <br><br><br>
+              
+            	<a href="#" class="text-dark" style="float: left;  margin-top: 5px; margin-left: 5px; text-decoration: none;"><i class="fa fa-envelope"></i>email</a><br>
+              
+                <!-- <a href="#" class="text-white"><i class="fa fa-phone-square"></i>phone</a> -->
+            </div><!--profile card ends-->
+
+            <br><br><br><br>
+
+            <div class="welcome">
+            <b style="font-size: 2em; margin-left: 70px; font-family: Poppins, sans-serif; color: white;">Welcome back,</b>
+            <p style="font-size: 1em; margin-left: 70px; font-family: Poppins, sans-serif; margin-top: 0px; color: white;">Choose from any of our services</p>
+            </div>
+
+            <br><br>
+          
+            <div class="overall_container" style="margin-top: 10px;">
+              {% if 'w' in userid or 'r' in userid%}
+
+              <a href="{{url_for('owned',username = username,userid = userid)}}">
+              <div class="container_indi" style="margin-left: 0%;">
+                <img src="../static/images/products.png" height="250px" width="380px"/> 
+                <br>
+                Products
+              </div>
+              </a>
+
+              <a href="{{url_for('order_history',username = username,userid = userid,**request.args)}}">
+              <div class="container_indi"  style="margin-left: 60px; padding-left: 50px; padding-right: 50px;">
+                <img src="../static/images/order_history.png" height="250px" width="250px"/> 
+                <br>
+                Order History
+              </div>
+              </a>
+
+              <a href="{{ url_for('cart',username = username,userid = userid,**request.args) }}">
+              <div class="container_indi"  style="margin-left: 60px; padding-left: 50px; padding-right: 50px;">
+                <img src="../static/images/cart.png" height="250px" width="250px"/> 
+                <br>
+                Cart
+              </div>
+              </a>
+
+              <a href="{{ url_for('make_request',username = username, userid = userid,**request.args) }}">
+                <div class="container_indi"  style="margin-left: 70px; padding-left: 100px; padding-right: 100px;">
+                  <img src="../static/images/booking.png" height="250px" width="350px"/> 
+                  <br>
+                  Order Bookings
+                </div>
+              </a>
+
+              {% endif %}
+              {% if 'w' in userid or 'm' in userid %}
+
+              <br>
+
+              <a href="{{url_for('pending',username = username,userid = userid,**request.args)}}">
+              <div class="container_indi" style="margin-left: 60px; margin-bottom: 50px;">
+                <img src="../static/images/request.png" height="250px" width="300px" style="padding-left: 70px; padding-right: 70px;"/> 
+                <br>
+                Pending Requests
+              </div>    
+              </a>                
+              {% endif %}
+
+              
+            </div>
+          
+
+          <!--
+            <ul class="nav-news-feed">
+                {% if 'w' in userid or 'r' in userid%}
+                    <li><i class="fa fa-book"></i><div><a href="{{url_for('order_history',username = username,userid = userid,**request.args)}}">Order History</a></div></li>
+                    <li><i class="fa fa-shopping-cart"></i><div><a href="{{ url_for('make_request',username = username, userid = userid,**request.args) }}">Order bookings</a></div></li>
+                    <li><i class="fa fa-cart"></i><div><a href="{{ url_for('cart',username = username,userid = userid,**request.args) }}">Cart</a></div></li>
+                {% endif %}
+                {% if 'w' in userid or 'm' in userid %}
+                    <li><i class="fa fa-credit-card"></i><div><a href="{{url_for('pending',username = username,userid = userid,**request.args)}}">Pending Requests</a></div></li>
+                {% endif %}
+              
+              <li><i class="fa fa-ownedproducts"></i><div><a href="{{url_for('owned',username = username,userid = userid)}}">Products</a></div></li>
+              <li><i class="fa fa-map-marker"></i><div><a href="#">Address</a></div></li>
+              <li><i class="fa fa-shopping-cart"></i><div><a href="#">Order bookings</a></div></li>
+              <li><i class="fa fa-question-circle"></i><div><a href="#">Help</a></div></li>
+              <li><i class="fa fa-cog"></i><div><a href="{{url_for('transport',username = username,userid = userid,**request.args)}}">Track Order</a></div></li>
+              <li><i class="fa fa-power-off"></i><div><a href="#">Log out</a></div></li>
+            </ul>news-feed links ends
+          --> 
+
+        
+        </div>
+
+        
+	</div>
+</div>
+
+
+</body>
+</html>
