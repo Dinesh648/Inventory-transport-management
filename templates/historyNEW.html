@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/sitimOrderNEW.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+    <title>Order History</title>
+</head>
+<body>
+    <a href="{{url_for('home',username = username,userid = userid,**request.args)}}" class="btn" style="font-size: 1em; margin-right: 40px; padding-left: 20px; padding-right: 20px; float: right;">Go back</a>
+    <h3>{{username}}</h3> 
+    <!-- displaying username -->
+    <h3 style="margin-top: 0px;">{{userid}}</h3>
+    <!-- displaying userid -->
+
+    <br><br>
+
+    <div class="container_1">
+    <h2 style="font-family: Poppins; font-size: 2em; margin-left: 40px;">All your orders in One Place,</h2>
+    <p style="margin-top: 0px; margin-left: 40px; font-size: 1em;">Get to know more information about your <br>ordered products and also track their location</p>
+    </div>
+
+    <br><br><br>
+
+    <div class="table-container">
+            
+                <table class="table">
+                    
+                    
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Availability</th>
+                        <th>Price</th>
+                        <th>Vehicle Number</th>
+                        <th>Seller Name</th>
+                        <th>Track your Order</th>
+                    </tr>
+                    
+                   
+
+                    <tbody>
+                    
+                        
+                    {%for product in previous %}
+                    <tr>
+                        <td>{{ product['pname'] }}</td>
+                        <td>{{ product['quantity'] }}</td>        
+                        <td>{{ product['price'] }}</td>
+                        <td>{{ product['vehi'] }}</td>
+                        <td>{{ product['recuserid'] }}</td>
+                        <td><a href="#" class = "btn" style="margin-top: 0px;"><b>Track order</b></a></td>
+                    </tr>
+                
+                    {%endfor%}
+
+                </tbody>
+                </table>
+                <br>
+                
+            <!-- <a href="{{url_for('cart',username = username,userid = userid,**request.args)}}" class="btn"> Cart</a> -->
+            <br><br>
+            
+            <script>
+                function myFunction() {
+                  const inpObj = document.getElementById("id1");
+                  if (!inpObj.checkValidity()) {
+                    document.getElementById("demo").innerHTML = inpObj.validationMessage;
+                  } else {
+                    document.getElementById("demo").innerHTML = "Input OK";
+                  } 
+                } 
+                </script>
+        </div>
+        </body>
+</html>
