@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SITIM</title>
-    <link rel="stylesheet" href="../static/css/sitim.css">
+    <link rel="stylesheet" href="../static/css/sitimSign.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
 
 </head>
 <body>
-    
-    <div class="segment1">
 
+    <div class="segment1">
         <nav>
 
             <div class="links">
@@ -28,119 +27,81 @@
                 
                 <ul>
                     
-                    <li><a href="{{ url_for('login')}}">LOGIN</a></li>
-                    <li><a href="{{ url_for('register') }}">SIGN-UP</a></li>
-                    <li><a href="#contact_us">CONTACT US</a></li>
+                    <li><a href="{{url_for('index')}}">HOME</a></li>
+                    <li><a href="{{url_for('login')}}">SIGN IN</a></li>
+        
     
                 </ul>
     
             </div>
             
         </nav>
-        
-        
-      
-        <div class="overlay">
-            CONNECTING<br> THE <br>ESSENTIALS
-        </div>
+        <br><br> <br><br> <br><br>
 
-        <a href="#segment2"><button class="buttongame"><b>EXPLORE</b></button></a>
-    
-    </div>
+        <p style="font-family: Poppins, sans-serif; font-size: 3em; color: white; position: relative; display: flex; justify-content: center;">Sign up</p>
+        <br><br><br><br>
 
-    <br><br>
-
-    <div class="segment2" id="segment2">
-        <p style="font-family: Poppins; font-size: 3em; margin-left: 40px;"><b>Our products</b></p><br>
-        <p style="font-family: Poppins; font-size: 1.5em; margin-left: 40px; line-height: 0px;">provide industry specific solutions</p>
-        <br><br>
-        <div class="maintain">
-            <img style="height: 400px; width: 600px; margin-left: 50px; vertical-align: middle;" src="../static/images/on_season.png"/>
-            <span>
-            <div class="maintain_text">
-                
-                <p style="font-size: 2em;"><b>Insights on your inventory</b></p>
-                <p style="font-size: 1em;">
-                    Helps you get better insights on what products are moving faster and which ones are not, based on their monthly purchases
-                    So that you make the right choices with the help of PowerBI</p>
-            </div>
-            </span>
-        </div>
-
-        <br><br>
-        <div class="maintain">
+        <div class="main">
             
-            <span>
-            <div class="track_text">
-                
-                <p style="font-size: 2em;"><b>Tracking your products</b></p>
-                <p style="font-size: 1em;">
-                    Providing a means for retailers and wholesalers to keep track of their products or goods by enabling GPS tracking of trucks carrying the specific product in case of transportation by road
-                </p>
-            </div>
-            </span>
 
-            <img style="height: 400px; width: 600px; margin-right: 100px; vertical-align: middle;" src="../static/images/tracking.png"/>
-        </div>
+            <form action="/register" method="POST" id="register" class="input-group">
+                <div class="card-left" style="float: left; width: 45%;"> 
+                    <input type="text" name="username" class="input-field" placeholder="Username" required><br>
+                    <input type="email" name="email" class="input-field" placeholder="Email Id" required><br>
+                    <input type="password" name="password" class="input-field" placeholder="Enter password" required><br>
+                    <input type="password" name="confirm-password" class="input-field" placeholder="Confirm password" required><br>
+                    <input type="text" name="cname" class="input-field" placeholder="Company Name" required><br>
+                    <input type="text" name="pnum" class="input-field" placeholder="Phone Number" required><br>
+                    <input type="text" name="address" class="input-field" placeholder="Address" required><br>
+                    <br>
+                </div>
 
-        <br><br><br>
-        <div class="maintain">
-            <img style="height: 400px; width: 600px; margin-left: 50px; vertical-align: middle;" src="../static/images/cross_docking.png"/>
-            <span>
-            <div class="maintain_text">
-                
-                <p style="font-size: 2em;"><b>Cross Docking</b></p>
-                <p style="font-size: 1em;">
-                    Provide comprehensive means of Cross-Docking where fast moving items are directly unloaded from supply truck to delivery truck
-                </p>
-            </div>
-            </span>
-            
-        </div>
-
-        <br><br><br><br><br><br>
-        <div class="quote">
-            <i><b>"Trade isn't about goods. Trade is about information.<br> Goods sit in the warehouse until information moves them"<br>C.J.Cherryh</b></i>
-        </div>
-
-        <br><br><br><br><br><br>
-        <div class="maintain">
-            
-            <span>
-            <div class="track_text">
-                
-                <p style="font-size: 2em;"><b>Cloud Powered solutions</b></p>
-                <p style="font-size: 1em;">
-                    Information directly fetched and written to available cloud resources provided by Google to improve connectivity and scalability. Providing data integrity to the supplier and the retailer
-                    <br>Now truck drivers are able to review information about their transporting goods and at the<br> same time ensure the security of the products
-                </p>
-            </div>
-            </span>
-            <img style="height: 300px; width: 500px; margin-right: 100px; vertical-align: middle;" src="../static/images/cloud.png"/>
+                <div class="card-right" style="float: right; margin-left: 40px; width: 45%;">
+                    
+                    <br>
+                    <input type="radio" id="manufacturer" name="organization" value="Manufacturer">
+                    <label for="manufacturer" style="text-align: left; color: white; font-size: 1.2em; font-family: Poppins, sans-serif;">Manufacturer</label><br><br>
+                    <input type="radio" id="wholesaler" name="organization" value="Wholesaler">
+                    <label for="wholesaler" style="text-align: left; color: white; font-size: 1.2em; font-family: Poppins, sans-serif; line-height: 10px;">Wholesaler</label><br><br>
+                    <input type="radio" id="retailer" name="organization" value="Retailer">
+                    <label for="retailer" style="text-align: left; color: white; font-size: 1.2em; font-family: Poppins, sans-serif;">Retailer</label>
+                    <br>
+                    <button type="submit" onclick="getLocation()">Get position</button>
+                    <p id="demo" style="color:white;"></p>
+                    <input type="text" id = "latitude" name="latitude" placeholder="latitude"><br>
+                    <input type="text" id="longitude" name="longitude" placeholder="longitude"><br>
+                    <button onclick="getLocation()" type="submit">Submit location</button><br>
+                    <script>
+                        var x = document.getElementById("demo");
+                        function getLocation() {
+                          if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(showPosition);
+                          } else {
+                            x.innerHTML = "Geolocation is not supported by this browser.";
+                          }
+                        }
+                        
+                        function showPosition(position) {
+                           latitude = position.coords.latitude ;
+                           longitude = position.coords.longitude;
+                           document.getElementById("latitude").setAttribute('value',position.coords.latitude) ;
+                           document.getElementById("longitude").setAttribute('value',position.coords.longitude) ;
+                        }
+                        </script>
+                        
+                    <button type="submit" class="submit-btn">Sign Up</button>
+                    <br><br>
+                    <a href="{{ url_for('login') }}" style="font-family: Poppins, sans-serif; color:white"> Already Registered?</a>
+                    <br><br>
+                    {% for message in get_flashed_messages()%}
+                        {{ message }}
+                    {%endfor%}
+                     
+                </div>    
+            </form> 
         </div>
 
     </div>
-
-    <br><br><br>
-    <p style="font-family: Poppins; font-size: 3em; margin-left: 40px;"><b>Developed by</b></p><br>
-    <div class="container" id="contact_us">
-        <div class="left"><img src="../static/images/person.png" height="200px" width="200px"/><br><b>Dinesh Balivada</b><br>4NI20CS030</div></a>
-        <div class="mid"><img src="../static/images/person.png" height="200px" width="200px"/><br><b>Chiranth Krishna K</b><br>4NI20CS026</div></a>
-        <div class="right"><img src="../static/images/person.png" height="200px" width="200px"/><br><b>Manali M Bandivadekar</b><br>4NI20CS048</div></a>
-    </div>
-
-    <br><br><br><br>
-
-    <div class="credits">
-        
-        <div class="credit_text">
-            <p style="font: 1em Poppin, sans-serif; color: white; vertical-align: middle; padding-top: 15px; margin-left: 40px;">&copy; Simple Interface for Transport and Inventory Management (SITIM)</p>
-        </div>
-    </div>
-    
-
 
 </body>
 </html>
-
-<!-- hello prands -->
