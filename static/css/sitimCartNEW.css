@@ -1,0 +1,112 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.bgd-danger {
+    background: linear-gradient(30deg, red, yellow);
+}
+.card-bg {
+    transition: 1s ease;
+}
+
+.card-bg:hover {
+    transform: skew(-10deg) scale(1.05);
+    transition: 1s ease;
+}
+
+.icons {
+    transition: .8s ease;
+    cursor: pointer;
+}
+
+.icons:hover {
+    color: #008E97;
+    transform: scale(1.02) translateY(-3px);
+    transition: .3s ease;
+}
+
+.iconck {
+    color: #008E97;
+    transform: scale(1.05) translateY(-3px);
+}
+
+.icon {
+    transition: 0.3s ease;
+}
+
+.icon:hover {
+    transform: scale(1.02);
+    transition: 0.3s ease;
+}
+
+.text-trans {
+    transition: .3s ease;
+}
+
+.text-trans:hover {
+    transform: skew(-15deg);
+    transition: .3s ease;
+}
+
+.btns {
+    text-decoration: none;;
+    color: black;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.btns:hover, .btns:active, .btns:focus {
+    color: black;
+    text-decoration: none;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+    -webkit-transform: scale(1.02);
+    transform: scale(1.02);
+}
+
+.bg-alert {
+    box-shadow: 0 0 3px rgba(0, 0, 0, .8);
+}
+
+.bg-alert-bg {
+    box-shadow: 0 0 10px rgba(0, 0, 0, .8);
+    transform: scale(1.02);
+}
+
+.w-35 {
+    width: 20% !important;
+}
+
+.mrg-ct {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.int-chagne {
+    transition: 0.3s ease;
+}
+
+.int-chagne:hover {
+    transform: skew(-15deg);
+    transition: 0.3s ease;
+}
+
+.turn {
+    display: block;
+    transform: none;
+    transition: 0.3s ease;
+}
+
+.turnb {
+    display: block;
+    transform: rotate(-180deg);
+    transition: 0.3s ease;
+}
+
+.clps {
+    text-decoration: none !important;
+}
+
+p {
+    margin-bottom: 0.5px !important;
+}
