@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/sitimOrdernew.css">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+    <title>Orders</title>
+    
+</head>
+<body>
+    <div class="container_2" style="float: right; margin-right: 40px; margin-top: 10px;">
+        <a href="{{url_for('cart',username = username,userid = userid,**request.args)}}" class="btn" style="font-size: 1em; padding-left: 20px; padding-right: 20px;"> Cart</a>
+        <a href="{{url_for('home',username = username,userid = userid,**request.args)}}" class="btn" style="font-size: 1em; margin-left: 40px; padding-left: 20px; padding-right: 20px;">Go back</a>
+    </div>
+
+    <h3>{{username}}</h3> 
+    <!-- displaying username -->
+    <h3 style="margin-top: 0px;">{{userid}}</h3>
+    <!-- displaying userid -->
+
+    <br><br>
+
+    <div class="container_1">
+    <h2 style="font-family: Poppins; font-size: 2em; margin-left: 40px;">Place all your Order Requests here,</h2>
+    <p style="margin-top: 0px; margin-left: 40px; font-size: 1em;">Get to know whose providing what <br>Make timely and profitable decisions from here</p>
+    </div>
+
+    <br><br><br>
+    <div class="table-container">
+            
+                <table class="table">
+                    
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Seller</th>
+                        <th>Price</th>
+                        <th>Available quantity</th>
+                        <th>Quantity</th>
+                        <th>Place your request</th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    {% for owned_product in owned_products %}
+                        
+                        <form action="/{{ userid }}/{{ username }}/request-product" method="POST">          
+                            <tr>
+                                <td>{{owned_product['pname']}}</td>
+                                <td>{{owned_product['userid']}}</td>
+                                <td>{{owned_product['price']}}</td>
+                                <td>{{owned_product['quantity']}}</td>
+                                <td><input class="w-25 pl-1" name={{owned_product['pname']}} value=100 min = "100" type="number"></td>
+                                
+                                    <td><button type="submit" class="btn" value="Place-request"><b>Place-request</b></button></td>
+                            </tr>
+                        </form>
+                    {%endfor%}
+
+                </tbody>
+                </table>
+                <br>
+            
+           
+            <script>
+                function myFunction() {
+                  const inpObj = document.getElementById("id1");
+                  if (!inpObj.checkValidity()) {
+                    document.getElementById("demo").innerHTML = inpObj.validationMessage;
+                  } else {
+                    document.getElementById("demo").innerHTML = "Input OK";
+                  } 
+                } 
+            </script>
+        </div>
+        </body>
+</html>
