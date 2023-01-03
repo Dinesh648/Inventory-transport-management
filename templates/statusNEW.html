@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/sitimOrderNEW.css">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+    <title>order</title>
+    </head>
+<body>
+    <div class="container_2" style="float: right; margin-right: 40px; margin-top: 10px;">
+        <a href="{{url_for('home',userid = userid,username = username,**request.args)}}" class="btn" value="GO BACK">GO BACK</a>
+    </div>
+
+    <h3>{{username}}</h3> 
+    <!-- displaying username -->
+    <h3 style="margin-top: 0px;">{{userid}}</h3>
+    <!-- displaying userid -->
+
+    <br><br>
+
+    <div class="container_1">
+    <h2 style="font-family: Poppins; font-size: 2em; margin-left: 40px;">Accept your Order Requests here,</h2>
+    <p style="margin-top: 0px; margin-left: 40px; font-size: 1em;">Get to know whose reqesting what <br>Make timely and profitable decisions from here</p>
+    </div>
+
+    <br><br>
+
+    <div class="table-container">
+             
+                <table class="table">
+                    
+                    <thead>
+                    <tr>
+                        <th>Placed from</th>
+                        <th>Product</th>
+                        <th>Status</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    {% for pending in pendings %}
+                    <form action="/{{ userid }}/{{ username }}/checking-request" method="POST"> 
+                        <tr>
+                            <td>{{pending['senduserid']}}</td>
+                            <td>{{pending['pname']}}</td>                           
+                            <td>{{pending['status']}}</td>
+                            <td>{{pending['quantity']}}</td>
+                            <td><button type="submit" name="product" style="padding-left: 20px; padding-right: 20px;" class="btn" value={{pending['pid']}}>Accept</button></td>
+                        </tr>
+                    </form>
+                    {%endfor%}
+                </tbody>
+                </table>
+                <br>
+                
+            
+        </div>
+        </body>
+</html>
