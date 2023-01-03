@@ -247,13 +247,19 @@ h4{
             <h4>Receiver: {{receiver}} </h4>
         </div>
         
+        <h4 id ="step1">Truck current location</h4>
+            Latitude : {{current_lat}} <br>
+            Longitude: {{current_long}} <br>
+            Status : {{status}}
+
+        <a href="https://www.google.com/maps/dir/?api=1&origin={{current_lat}},{{current_long}}0000001&destination={{dest_lat}},{{dest_long}}">Track me</a>
 
         <div class="footer">
             <div class="row">
                 
                 <div class="col-10">Want any help? Please &nbsp;<a> contact us</a></div>
             </div>
-            
+          
            
         </div>
     </div>

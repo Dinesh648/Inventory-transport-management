@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/sitimProfileNEW.css"> 
+    <link rel="stylesheet" href="../../static/css/sitimProfileNEW.css"> 
     <!--css file sitimProfile.css-->
     <title>profile</title>
     
@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-md-4 static">
             <div class="profile-card">
-              <img src="../static/images/profile_icon.png" height="100px" width="100px" style="float: left; margin-left: 50px;"/> 
+              <img src="../../static/images/profile_icon.png" height="100px" width="100px" style="float: left; margin-left: 50px;"/> 
             	<a href="#" class="text-dark" style="float: left;"><h1>{{username}}</h1></a>
               <button><b>Log Out</b></button>
               <br><br><br>
@@ -45,7 +45,7 @@
 
               <a href="{{url_for('owned',username = username,userid = userid)}}">
               <div class="container_indi" style="margin-left: 0%;">
-                <img src="../static/images/products.png" height="250px" width="380px"/> 
+                <img src="../../static/images/products.png" height="250px" width="380px"/> 
                 <br>
                 Products
               </div>
@@ -53,7 +53,7 @@
 
               <a href="{{url_for('order_history',username = username,userid = userid,**request.args)}}">
               <div class="container_indi"  style="margin-left: 60px; padding-left: 50px; padding-right: 50px;">
-                <img src="../static/images/order_history.png" height="250px" width="250px"/> 
+                <img src="../../static/images/order_history.png" height="250px" width="250px"/> 
                 <br>
                 Order History
               </div>
@@ -61,7 +61,7 @@
 
               <a href="{{ url_for('cart',username = username,userid = userid,**request.args) }}">
               <div class="container_indi"  style="margin-left: 60px; padding-left: 50px; padding-right: 50px;">
-                <img src="../static/images/cart.png" height="250px" width="250px"/> 
+                <img src="../../static/images/cart.png" height="250px" width="250px"/> 
                 <br>
                 Cart
               </div>
@@ -69,7 +69,7 @@
 
               <a href="{{ url_for('make_request',username = username, userid = userid,**request.args) }}">
                 <div class="container_indi"  style="margin-left: 70px; padding-left: 100px; padding-right: 100px;">
-                  <img src="../static/images/booking.png" height="250px" width="350px"/> 
+                  <img src="../../static/images/booking.png" height="250px" width="350px"/> 
                   <br>
                   Order Bookings
                 </div>
@@ -82,7 +82,7 @@
 
               <a href="{{url_for('pending',username = username,userid = userid,**request.args)}}">
               <div class="container_indi" style="margin-left: 60px; margin-bottom: 50px;">
-                <img src="../static/images/request.png" height="250px" width="300px" style="padding-left: 70px; padding-right: 70px;"/> 
+                <img src="../../static/images/request.png" height="250px" width="300px" style="padding-left: 70px; padding-right: 70px;"/> 
                 <br>
                 Pending Requests
               </div>    

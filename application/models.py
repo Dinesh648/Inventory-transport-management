@@ -100,10 +100,11 @@ class Request(db.Model,UserMixin):
 
 class Transport(db.Model,UserMixin):
     __tablename__ = "transport"
-    state = db.Column(db.String(40),default = 'Not-assigned')
-    tnum = db.Column(db.Integer,primary_key = True)
+    state = db.Column(db.String(40),default = 'Not Assigned')
+    tnum = db.Column(db.String,primary_key = True)
     destination = db.Column(db.String(100))
     buyerid = db.Column(db.String(50))
+    sellerid = db.Column(db.String(50))
     def get_id(self):
         return self.recuserid
 

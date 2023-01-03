@@ -25,7 +25,7 @@ def index():
 @login_required
 def home(userid,username):
     
-    return render_template('profile.html',userid = userid,username = username)
+    return render_template('profileNEW.html',userid = userid,username = username)
     
 
 
@@ -158,32 +158,19 @@ def register():
                             username = username,
                             email = email,
                             cname = cname,
-                            password = hashed_password,
-                        )
+                            password = hashed_password
+                            )
                         new_location = Location(
                             userid = rid,
                             latitude = latitude,
                             longitude = longitude
                         )
-                        db.session.add(new_location) 
+                        db.session.add(new_location)
                         db.session.add(new_retailer)
                         db.session.commit()
                     except IntegrityError:
                         flash("Retailer already exists!")
                         return redirect(url_for('register'))
-                # try:
-                #     new_user = Users(
-                #         username=username,
-                #         email=email,
-                #         cname=cname,
-                #         password=hashed_password,
-                #     )
-
-                #     db.session.add(new_user)
-                #     db.session.commit()
-                    
-                # except IntegrityError:
-                #     return redirect(url_for('register') + '?error=user-or-email-exists')
 
                 return redirect(url_for('login') + '?success=account-created')
             else:
@@ -251,9 +238,18 @@ def cart(username,userid):
         return render_template("samplecart.html",userid = userid,username = username,orders = orders,total = sum)
     elif request.method == "POST":
         address = request.form['address']
-        
+        orders = Request.query.filter_by(senduserid = userid,status = "Accepted").first()
+        sellerid = orders.recuserid
+        tstring = "KA05MA"
+        if('w' in orders.recuserid):
+            number = Wholesaler.query.count()
+        elif('m' in orders.recuserid):
+            number = Retailer.queyr.count()
+        tnum = tstring + str(number+1+1230)
         flash("Your address has been added!!!")
         new_transport = Transport(
+                tnum = tnum,
+                sellerid = sellerid,
                 buyerid  = userid,
                 destination = address,
             )
@@ -276,7 +272,7 @@ def owned(username,userid):
     #common for both retialer and the wholesaler
     products = Owned.query.filter_by(userid = userid).all()
     # return render_template("sample.html",products = products)
-    return render_template("myproducts.html",username = username,userid = userid,products = products)
+    return render_template("productsNEW.html",username = username,userid = userid,previous = products)
 
 @app.route('/<string:userid>/<string:username>/request-product',methods = ['GET','POST'])
 def make_request(userid,username):
@@ -371,8 +367,9 @@ def pending(userid,username):
 @app.route('/<string:userid>/<string:username>/history',methods = ['GET','POST'])
 def order_history(username,userid):
     # previous = Request.query.filter_by(senduserid = userid,status = "Accepted")
-    previous = Orders.query.filter_by(userid = userid)
-    return render_template('history.html',previous = previous)
+    # previous = Orders.query.filter_by(userid = userid)
+    previous = db.session.query(Orders,Owned).filter(Orders.pid == Owned.pid,Orders.userid == userid).all()
+    return render_template('historyNEW.html',previous = previous,username = username,userid = userid)
 
 @app.route('/<string:userid>/<string:username>/transport',methods = ['GET','POST'])
 def transport(username,userid):
@@ -381,7 +378,21 @@ def transport(username,userid):
     summing = 0
     for i in sumtotal:
         summing += (i.quantity * i.price)
-    return render_template("trackorder.html",tnum = info.tnum,receiver = info.buyerid,final = summing + 100,amount = summing)
+    tnum = info.tnum
+    sellerid = info.sellerid
+    if('m' in sellerid):
+        seller = Manufacturer.query.filter_by(mid = sellerid).first()
+    elif('w' in sellerid):
+        seller = Wholesaler.query.filter_by(wid = sellerid).first()
+    cname = seller.cname
+    loc = dab.child("trucks").child(cname).child(tnum).get()
+    keys  = dab.child("trucks").child(cname).child(tnum).shallow().get()
+    display = []
+    for i in loc.each():
+        display.append(i.val())
+    
+    # return render_template('sample.html',loc = display[0]['curr_lat'])
+    return render_template("trackorder.html",tnum = info.tnum,receiver = info.buyerid,final = summing + 100,amount = summing,current_lat = display[0]['curr_lat'],current_long = display[0]['curr_long'],status = display[0]['status'],dest_lat = display[0]['dest_lat'],dest_long = display[0]['dest_long'])
 
 @app.route('/<string:userid>/<string:username>/paid',methods = ['GET','POST'])
 def paid(username,userid):
@@ -411,10 +422,12 @@ def paid(username,userid):
         dnum = 100
         for i in sellerlist:
             if 'm' in i:
+                assignment = Transport.query.filter_by(buyerid = userid).first()
                 product_list = Request.query.filter_by(recuserid = i,status = "Accepted").all()
                 seller = Manufacturer.query.filter_by(mid = i).one()
-                truck = str(trucknum + str(num+1))
-                sellername = seller.username
+                #truck = str(trucknum + str(num+1))
+                truck = assignment.tnum
+                sellername = seller.cname
                 location_details = Location.query.filter_by(userid = i).one()
                 currentlat = 0.0
                 currentlong = 0.0
@@ -433,10 +446,12 @@ def paid(username,userid):
                 
                 dab.child("trucks").child(sellername).child(truck).set({"curr_lat":str(0.0),"curr_long":str(0.0),"dest_address":dest_address,"dest_lat":buyerlat,"dest_long":buyerlong,"name":driver, "vehicle_num":truck})
             elif 'w' in i:
+                assignment = Transport.query.filter_by(buyerid = userid).first()
                 product_list = Request.query.filter_by(recuserid = i,status = "Accepted").all()
                 seller = Wholesaler.query.filter_by(wid = i).one()
-                truck = str(trucknum + str(num+1))
-                sellername = seller.username
+                #truck = str(trucknum + str(num+1))
+                truck = assignment.tnum
+                sellername = seller.cname
                 location_details = Location.query.filter_by(userid = i).one()
                 currentlat = 0.0
                 currentlong = 0.0
@@ -445,16 +460,29 @@ def paid(username,userid):
                 buyer_location = Location.query.filter_by(userid = userid).one()
                 buyerlat = buyer_location.latitude
                 buyerlong = buyer_location.longitude
-                driver = "D" + str(dnum+1)
-                # dab.child("trucks").child(sellername).child(truck).child("cross_dock")
+                driver = "D" + str(dnum+1)              
+                
+                testlist= {} 
+                j = 0
+                status = "pending"
                 for i in product_list:
                     quantity = i.quantity
+                    pid = i.pid
                     pname = i.pname
-                    name = "P"+str(pnum+1)
-                    insertstring = str(pname)+","+str(quantity)
-                    dab.child("trucks").child(sellername).child(truck).child("goods").set({name:(insertstring)})
+                    
+                    j+=1
+                    string = "P"+str(pid)+str(j)
+                    testlist[string] = str(pname)+","+str(quantity)
+                dab.child("trucks").child(sellername).child(truck).child("goods").set(testlist)
+                teststring = ''
                 
-                dab.child("trucks").child(sellername).child(truck).set({"curr_lat":str(0.0),"curr_long":str(0.0),"dest_address":dest_address,"dest_lat":buyerlat,"dest_long":buyerlong,"name":driver, "vehicle_num":truck})
+                # for i in testlist:
+                #     teststring += i+','
+                
+                dab.child("trucks").child(sellername).child(truck).child("details").set({"curr_lat":str(0.0),"curr_long":str(0.0),"dest_address":dest_address,"dest_lat":buyerlat,"dest_long":buyerlong,"name":driver,"delivered":status ,"vehicle_num":truck})
         
         return render_template("paid.html",username = username,userid = userid)
+    
+
+
        

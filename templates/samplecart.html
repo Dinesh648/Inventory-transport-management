@@ -157,6 +157,7 @@
                 color: #ffa200;
                 transform: skew(-15deg);
                 transition: .5s ease;
+                width: 10px;
             }
             
             p {
@@ -539,7 +540,7 @@
                                             </div>
                                         </div>
                                         <h2 class="text-center my-3">Profile</h2>
-                                        <div class="">
+                                        <!-- <div class="">
                                             <table class="table table-sm">
                                                 <tbody>
                                                     <tr>
@@ -560,17 +561,18 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                        </div>
+                                        </div> -->
                                         
                                     </div>
                                 </div>
                                 <div class="list-group mt-5 p-0 mb-3 justify-content-center" id="allList" role="tablist" style="flex-direction: row;">
-                                    <a href="#step1" class="list-group-item-dark ml-3 w-35 py-2  rounded text-center btns home" data-toggle="list" role="tab">
+                                    
                                         <form action="/{{userid}}/{{username}}/cart" method="POST">
                                             <!-- <div class="d-flex justify-content-center">
                                                 
                                             </div> -->
-                                            <a href="{{url_for('paid',username = username,userid = userid,**request.args)}}">Pay</a>
+                                            <a href="{{url_for('paid',username = username,userid = userid,**request.args)}}" class="list-group-item-dark ml-3 w-35 py-2  rounded text-center btns home" data-toggle="list" role="tab">Pay</a>
+                                            <!-- <a href="{{url_for('paid',username = username,userid = userid,**request.args)}}">Pay</a> -->
                                         </form>
                                         <!-- <i class="fas fa-home"></i> -->
                                     </a>

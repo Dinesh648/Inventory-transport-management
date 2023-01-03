@@ -63,7 +63,7 @@
                     <p id="demo" style="color:white;"></p>
                     <input type="text" id = "latitude" name="latitude" placeholder="latitude">
                     <input type="text" id="longitude" name="longitude" placeholder="longitude">
-                    <button onclick="getLocation()">Submit location</button>
+                    <button onclick="getLocation()" class="submit-btn">Submit</button>
                     <script>
                         var x = document.getElementById("demo");
                         function getLocation() {
@@ -81,7 +81,7 @@
                            document.getElementById("longitude").setAttribute('value',position.coords.longitude) ;
                         }
                         </script>
-                    <button type="submit" class="submit-btn">Sign Up</button><a href="{{ url_for('login') }}" style="font-family: Poppins, sans-serif; color:white"> Already Registered?</a>
+                    <a href="{{ url_for('login') }}" style="font-family: Poppins, sans-serif; color:white"> Already Registered?</a>
                     <br><br>
                     {% for message in get_flashed_messages()%}
                         {{ message }}

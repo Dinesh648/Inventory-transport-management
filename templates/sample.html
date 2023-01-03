@@ -8,29 +8,11 @@
 </head>
 <body>
     <p>Getting data....</p>
-    <h4>Owned</h4>
-{% for owned_product in owned_products %}
-                        
-    {{owned_product}}
-{%endfor%}
-<br>
-<h4>Requested</h4>
-{% for req in requested %}
-                        
-    {{req}}
-{%endfor%}
-
-<h4>Display</h4>
-{% for dis in display %}
-                        
-    {{dis}}
-{%endfor%}
-
-<h4>Available_products</h4>
-{% for ava in products_available %}
-                        
-    {{ava}}
-{%endfor%}
-  
-{{listing}}
+    {%for i in previous%}
+        {{i[0]['userid']}}
+        {{i[0]['quantity']}}
+        {{i[0]['pid']}}
+        {{i[1]['pname']}}
+        {{i[1]['userid']}}
+    {%endfor%}
 </html>

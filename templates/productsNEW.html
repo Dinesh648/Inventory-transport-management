@@ -13,6 +13,89 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
     <title>Order History</title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+    }
+    
+    h3{
+        font-family: "Poppins", sans-serif;
+        font-size: 1.5em;
+        margin-left: 40px;
+        margin-top: 40px;
+    }
+    
+    .container_1{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-color: black;
+        color: white;
+        width: 100%;
+        font-family: "Poppins", sans-serif;
+    }
+    
+    .table-container{
+        margin-left: 40px;
+        margin-right: 40px;
+    
+    }
+    .table-container h2{
+        font-size: 30px;
+        text-align: center;
+        padding: 0px 0px 0px 0px;
+        color: rgb(0, 183, 255);
+    }
+    table{
+        width:100%;
+        border-collapse:collapse;
+    }
+    
+    
+    .btn{
+        padding: 5px; 
+        border-color: #446363;
+        text-decoration: none;
+        border-style: solid;
+        color: #446363; 
+        border-width: 2px; 
+        font-size: 0.7em;
+        background-color: white;
+        transition: 0.2s;
+        font-family: "Poppins", sans-serif;
+    }
+    
+    th{
+        background-color: #446363;
+        font-size: 1em;
+        font-family: "Poppins", sans-serif;
+        color: white;
+    }
+    
+    th, td{
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+        vertical-align: middle;
+    }
+    
+    td{
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+        font-size: 1em;
+    }
+    
+    
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    
+    .btn:hover{
+        background-color: #446363;
+        color: white;
+    }
+    </style>
 </head>
 <body>
     <a href="{{url_for('home',username = username,userid = userid,**request.args)}}" class="btn" style="font-size: 1em; margin-right: 40px; padding-left: 20px; padding-right: 20px; float: right;">Go back</a>
@@ -39,11 +122,8 @@
                         <th>Product Name</th>
                         <th>Quantity</th>
                         <th>Cost Price</th>
-                        <th>Selling Price</th>
-                        <th>Category</th>
-                        <th>Manufacturing Date</th>
-                        <th>Expiry Date</th>
-                        <th>Profit</th>
+                        
+                        
                     </tr>
                     
                    
@@ -56,11 +136,7 @@
                         <td>{{ product['pname'] }}</td>
                         <td>{{ product['quantity'] }}</td>        
                         <td>{{ product['price'] }}</td>
-                        <td>{{ product['vehi'] }}</td>
-                        <td>{{ product['recuserid'] }}</td>
-                        <td>{{ product['price'] }}</td>
-                        <td>{{ product['vehi'] }}</td>
-                        <td>{{ product['recuserid'] }}</td>
+                        
                     </tr>
                 
                     {%endfor%}
