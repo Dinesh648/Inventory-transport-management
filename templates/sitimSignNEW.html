@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITIM</title>
+    <link rel="stylesheet" href="../static/css/sitimSign.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <link href="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+
+</head>
+<body>
+
+    <div class="segment1">
+        <nav>
+
+            <div class="links">
+              
+                <div class="name">
+                  <h1>SITIM</h1>
+                </div>
+                
+                <ul>
+                    
+                    <li><a href="{{url_for('index')}}">HOME</a></li>
+                    <li><a href="{{url_for('login')}}">SIGN IN</a></li>
+        
+    
+                </ul>
+    
+            </div>
+            
+        </nav>
+        <br><br> <br><br> <br><br>
+
+        <p style="font-family: Poppins, sans-serif; font-size: 3em; color: white; position: relative; display: flex; justify-content: center;">Sign up</p>
+        <br><br><br><br>
+
+        <div class="main">
+            
+
+            <form action="/register" method="POST" id="register" class="input-group">
+                <div class="card-left" style="float: left; width: 45%;"> 
+                    <input type="text" name="username" class="input-field" placeholder="Username" required><br>
+                    <input type="email" name="email" class="input-field" placeholder="Email Id" required><br>
+                    <input type="password" name="password" class="input-field" placeholder="Enter password" required><br>
+                    <input type="password" name="confirm-password" class="input-field" placeholder="Confirm password" required><br>
+                    <input type="text" name="cname" class="input-field" placeholder="Company Name" required><br>
+                    <input type="text" name="pnum" class="input-field" placeholder="Phone Number" required><br>
+                    <input type="text" name="address" class="input-field" placeholder="Address" required><br>
+                    <br>
+                </div>
+
+                <div class="card-right" style="float: right; margin-left: 40px; width: 45%;">
+                    
+                    <br>
+                    <input type="radio" id="manufacturer" name="organization" value="Manufacturer">
+                    <label for="manufacturer" style="text-align: left; color: white; font-size: 1.2em; font-family: Poppins, sans-serif;">Manufacturer</label><br><br>
+                    <input type="radio" id="wholesaler" name="organization" value="Wholesaler">
+                    <label for="wholesaler" style="text-align: left; color: white; font-size: 1.2em; font-family: Poppins, sans-serif; line-height: 10px;">Wholesaler</label><br><br>
+                    <input type="radio" id="retailer" name="organization" value="Retailer">
+                    <label for="retailer" style="text-align: left; color: white; font-size: 1.2em; font-family: Poppins, sans-serif;">Retailer</label>
+                    <br>
+                    <button type="submit" onclick="getLocation()">Get position</button>
+                    <p id="demo" style="color:white;"></p>
+                    <input type="text" id = "latitude" name="latitude" placeholder="latitude"><br>
+                    <input type="text" id="longitude" name="longitude" placeholder="longitude"><br>
+                    <button onclick="getLocation()" type="submit">Submit location</button><br>
+                    <script>
+                        var x = document.getElementById("demo");
+                        function getLocation() {
+                          if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(showPosition);
+                          } else {
+                            x.innerHTML = "Geolocation is not supported by this browser.";
+                          }
+                        }
+                        
+                        function showPosition(position) {
+                           latitude = position.coords.latitude ;
+                           longitude = position.coords.longitude;
+                           document.getElementById("latitude").setAttribute('value',position.coords.latitude) ;
+                           document.getElementById("longitude").setAttribute('value',position.coords.longitude) ;
+                        }
+                        </script>
+                        
+                    <button type="submit" class="submit-btn">Sign Up</button>
+                    <br><br>
+                    <a href="{{ url_for('login') }}" style="font-family: Poppins, sans-serif; color:white"> Already Registered?</a>
+                    <br><br>
+                    {% for message in get_flashed_messages()%}
+                        {{ message }}
+                    {%endfor%}
+                     
+                </div>    
+            </form> 
+        </div>
+
+    </div>
+
+</body>
+</html>
