@@ -235,7 +235,7 @@ def cart(username,userid):
         sum = 0
         for i in orders:
             sum += (i.price*i.quantity)
-        return render_template("samplecart.html",userid = userid,username = username,orders = orders,total = sum)
+        return render_template("samplecartNEW.html",userid = userid,username = username,orders = orders,total = sum)
     elif request.method == "POST":
         address = request.form['address']
         orders = Request.query.filter_by(senduserid = userid,status = "Accepted").first()
