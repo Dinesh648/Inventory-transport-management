@@ -36,6 +36,8 @@
             </div>
             
         </nav>
+        
+        <br><br><br><br>
 
         <div class="main">
             <p style="font-family: Poppins, sans-serif; font-size: 3em; color: white;">Sign up</p>
@@ -63,7 +65,7 @@
                     <p id="demo" style="color:white;"></p>
                     <input type="text" id = "latitude" name="latitude" placeholder="latitude">
                     <input type="text" id="longitude" name="longitude" placeholder="longitude">
-                    <button onclick="getLocation()" class="submit-btn">Submit</button>
+                    <button onclick="getLocation()" class="submit-btn" type="button">Submit</button>
                     <script>
                         var x = document.getElementById("demo");
                         function getLocation() {
@@ -81,6 +83,7 @@
                            document.getElementById("longitude").setAttribute('value',position.coords.longitude) ;
                         }
                         </script>
+                    <br>
                     <a href="{{ url_for('login') }}" style="font-family: Poppins, sans-serif; color:white"> Already Registered?</a>
                     <br><br>
                     {% for message in get_flashed_messages()%}
