@@ -3,9 +3,10 @@
     padding: 0;
 }
 
-html{
+html, body{
     scroll-behavior: smooth;
 }
+
 
 .name{
     color:white;
@@ -63,77 +64,104 @@ nav{
     height: 100%;
 }
 
+
 .segment1{
     margin-left: auto;
     margin-right: auto;
-    background-image: url('../images/sign_up.jpg');
+    background-image: url('../images/home_first_image.jpg');
     background-position: fixed;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height:800px;
+    height: 750px;
     overflow: hidden;
     position: relative;
 }
 
-.main{
+.overlay{
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 40px;
+    align-content: center;
+    font-family: 'Oswald', sans-serif;
+    line-height: 1;
+    color: white;
     width: 100%;
+    height: 100%;
+    font-size: 7em;
+}
+
+.buttongame{
+    margin-top: 650px;
+    margin-left: 40px;
+    background:transparent;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: none;
+    display: block;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: white;
+    transform: skewX(0deg);
+    border-style: solid;
+    transition-duration: 0.3s;
+}
+
+.buttongame:hover{
+    background-color: white;
+    color: black;
+    border: white;
+    border-style: solid;
+}
+
+.maintain_text{
+    font-family: 'Poppins', sans-serif;
+   
+    margin-right: 150px;
+}
+
+.maintain{
     display: flex;
     align-items: center;
-    justify-content: center;
-    
-}    
-    
+}
 
-input[type=email] {
+.track_text{
+    font-family: 'Poppins', sans-serif;
+   
+    margin-left: 150px;
+}
+
+.quote{
+    font-family: "Poppins", sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2em;
+    align-items: center;
+    text-align: center;
+}
+
+.credits{
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid white;
-    border-radius: 4px;
+    background-color: black;
+    height: 50px;
 }
-
-input[type=email]:focus {
-    border: 3px solid wheat;
-}
-
-input[type=text] {
+ 
+.container{
+    margin-top: 10px;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid white;
-    border-radius: 4px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
 }
 
-input[type=text]:focus {
-    border: 3px solid wheat;
-}
-
-input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid white;
-    border-radius: 4px;
-}
-
-input[type=password]:focus {
-    border: 3px solid wheat;
-}
-
-button[type=submit] {
+.container div{
     width: 50%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid white;
-    border-radius: 4px;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
 }
 
-button[type=submit]:focus {
-    border: 3px solid wheat;
-}
+
+
